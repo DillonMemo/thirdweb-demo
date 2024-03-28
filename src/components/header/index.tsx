@@ -10,9 +10,9 @@ import { throttle } from 'lodash'
 export default function Header() {
   const connectionStatus = useConnectionStatus()
   const { isAutoConnecting } = useWalletContext()
-  console.log('connect status', connectionStatus, isAutoConnecting)
+  console.warn('connect status', connectionStatus, isAutoConnecting)
 
-  const onConnect = useCallback(async (e: React.MouseEvent<HTMLButtonElement>) => {
+  const onConnect = useCallback(async () => {
     try {
       toast('🦄 Wow so easy!', {
         position: 'top-right',
