@@ -2,26 +2,29 @@
 
 import 'react-toastify/dist/ReactToastify.css'
 import { Bounce, ToastContainer, toast } from 'react-toastify'
+import {
+  ConnectWallet,
+  WalletInstance,
+  useConnectionStatus,
+  useWalletContext,
+} from '@thirdweb-dev/react'
 import { useCallback, useEffect } from 'react'
-import { useConnectionStatus, useWalletContext } from '@thirdweb-dev/react'
 import styled from 'styled-components'
 import { throttle } from 'lodash'
 
 export default function Header() {
   const connectionStatus = useConnectionStatus()
   const { isAutoConnecting } = useWalletContext()
-  console.warn('connect status', connectionStatus, isAutoConnecting)
 
-  const onConnect = useCallback(async () => {
-    try {
-      toast('🦄 Wow so easy!', {
-        position: 'top-right',
-        transition: Bounce,
-      })
-    } catch (error) {
-      toast.error('failed to connect')
-      console.error('%c failed to connect', error)
-    }
+  // eslint-disable-next-line no-console
+  console.log('connect status', connectionStatus, isAutoConnecting)
+
+  const onConnect = useCallback((wallet: WalletInstance) => {
+    // eslint-disable-next-line no-console
+    console.log(wallet)
+    toast.success('Successed connect to wallet', {
+      transition: Bounce,
+    })
   }, [])
   useEffect(() => {
     const onScroll = () => {
@@ -44,10 +47,21 @@ export default function Header() {
 
   return (
     <HeaderWrap className="header">
-      <div>
-        <button onClick={onConnect}>START</button>
+      <div className="right">
+        <ConnectWallet
+          className="connect-wallet-button"
+          modalSize="wide"
+          btnTitle="Login"
+          modalTitle="Sample Modal"
+          modalTitleIconUrl="https://polygon.miracleplay.gg/static/media/miracle-wallet-logo.fc4f85e929ed4f42ffba971f031e0c0b.svg"
+          welcomeScreen={{
+            title: 'welcome title',
+            subtitle: 'welcom sub title',
+          }}
+          onConnect={onConnect}
+        />
       </div>
-      <ToastContainer position="top-left" autoClose={3000} />
+      <ToastContainer position="top-right" autoClose={3000} bodyClassName={'toastify-body'} />
     </HeaderWrap>
   )
 }
@@ -73,6 +87,56 @@ export const HeaderWrap = styled.header`
     line-height: 4rem;
   }
 
-  h1 {
+  .right {
+    height: 100%;
+    padding: 0 1.5rem;
+
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: flex-end;
+
+    .connect-wallet-button {
+      font-size: 1rem;
+      color: #ffffff;
+      background-color: transparent;
+      border: 2px solid #ffffff;
+
+      width: fit-content;
+      min-width: fit-content !important;
+      height: 2.5rem;
+      line-height: 1rem;
+      padding: 0 1.5rem;
+
+      transition: border-color 0.3s ease, color 0.3s ease !important;
+
+      &.tw-connected-wallet {
+        height: 2.75rem;
+        img {
+          width: 1.5rem !important;
+          height: 1.5rem !important;
+        }
+        > div {
+          gap: 0.1875rem !important;
+          .tw-connected-wallet__address {
+            font-size: 0.75rem;
+          }
+          .tw-connected-wallet__balance {
+            font-size: 0.625rem;
+            color: lightgray;
+          }
+        }
+      }
+      &:hover,
+      &:focus {
+        border-color: lightgray;
+        color: lightgray;
+      }
+      svg {
+        circle {
+          stroke: #ffffff;
+        }
+      }
+    }
   }
 `

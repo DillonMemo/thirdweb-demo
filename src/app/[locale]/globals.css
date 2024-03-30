@@ -82,6 +82,9 @@ body {
   overflow-x: hidden;
   font-family: var(--font-pretendard-std);
 }
+body[data-scroll-locked] {
+  margin-right: 0 !important;
+}
 
 body {
   color: rgb(var(--foreground-rgb));
@@ -94,12 +97,62 @@ a {
   text-decoration: none;
 }
 
-.mh-8 {
-  max-height: 8rem;
+.toastify-body {
+  max-height: 4rem;
+  padding: 0;
 }
 
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
   }
+}
+
+/* ========= 서드웹 connect wallet modal ========= */
+.css-k23hpx > div {
+  background: url('https://i.redd.it/tc0aqpv92pn21.jpg') center / cover no-repeat;
+}
+
+/* Left side of the Thirdweb connect wallet modal > 묶지않으면 여러개가 선택됩니다. */
+.css-k23hpx > div .css-1exidmz {
+  border-right: none;
+}
+.css-k23hpx > div .css-1exidmz > .css-1d4s0we > .css-16upjj0 {
+  border-top: none;
+}
+
+/* Right side of the Thirdweb connect wallet modal */
+.css-k23hpx > div .css-1d4s0we span.css-14k66z6 {
+  color: hsl(255, 3.4%, 87.7%);
+}
+.css-k23hpx > div .css-1d4s0we button.css-ln0jr3 {
+  border-color: white;
+}
+.css-k23hpx > div .css-1d4s0we button.css-ln0jr3:hover {
+  border-color: #3385ff;
+}
+.css-k23hpx > div .css-1d4s0we > div.css-u5lkp0:before,
+.css-k23hpx > div .css-1d4s0we > div.css-u5lkp0:after {
+  border-color: white;
+}
+.css-k23hpx > div .css-1d4s0we input[type='email'] {
+  box-shadow: 0 0 0 1.5px white;
+}
+.css-k23hpx > div .css-1d4s0we input[type='email']:focus {
+  box-shadow: 0 0 0 2px #3385ff;
+}
+.css-k23hpx > div .css-1d4s0we input[type='email']::placeholder {
+  color: lightgray;
+}
+.css-k23hpx > div .css-1d4s0we .css-k5jmq8 {
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 0.5rem;
+}
+.css-k23hpx > div .css-1d4s0we:has(> a.css-k4d0e1) {
+  display: none !important;
+}
+
+/* x 버튼입니다 */
+.css-k23hpx .css-sj80wb {
+  background: none !important;
 }
