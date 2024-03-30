@@ -97,9 +97,19 @@ a {
   text-decoration: none;
 }
 
-.toastify-body {
-  max-height: 4rem;
-  padding: 0;
+/** 스크롤바 커스텀 */
+::-webkit-scrollbar {
+  width: 3px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(34, 45, 50, 0.5);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(34, 45, 50, 1);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -108,6 +118,10 @@ a {
   }
 }
 
+.toastify-body {
+  max-height: 4rem;
+  padding: 0;
+}
 /* ========= 서드웹 connect wallet modal ========= */
 .css-k23hpx > div {
   background: url('https://i.redd.it/tc0aqpv92pn21.jpg') center / cover no-repeat;
