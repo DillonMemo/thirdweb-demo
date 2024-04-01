@@ -1,6 +1,8 @@
 import './globals.css'
+import Header from '@/components/header'
 import { LocaleType } from '@/i18n'
 import type { Metadata } from 'next'
+import Navigation from '@/components/navigation'
 import RootProvider from '@/lib'
 import localFont from 'next/font/local'
 
@@ -11,8 +13,8 @@ const myFont = localFont({
 })
 
 export const metadata: Metadata = {
-  title: 'Miracle Demo',
-  description: 'ThirdWeb Demo',
+  title: 'Estack Demo',
+  description: 'This Estack rendering page',
 }
 
 export default function RootLayout({
@@ -25,7 +27,12 @@ export default function RootLayout({
   return (
     <html lang={locale} className={`${myFont.variable}`}>
       <body>
-        <RootProvider locale={locale}>{children}</RootProvider>
+        <RootProvider locale={locale}>
+          {/* <Header /> */}
+          <Navigation />
+
+          {children}
+        </RootProvider>
       </body>
     </html>
   )
