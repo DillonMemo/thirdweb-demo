@@ -1,5 +1,4 @@
 import './globals.css'
-import Header from '@/components/header'
 import { LocaleType } from '@/i18n'
 import type { Metadata } from 'next'
 import Navigation from '@/components/navigation'
@@ -28,7 +27,6 @@ export default function RootLayout({
     <html lang={locale} className={`${myFont.variable}`}>
       <body>
         <RootProvider locale={locale}>
-          {/* <Header /> */}
           <Navigation />
 
           {children}

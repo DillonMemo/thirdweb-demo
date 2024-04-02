@@ -23,7 +23,8 @@ export default function Slider() {
         <ListItem
           className={[styles.item].join(' ')}
           style={{
-            backgroundImage: "url('https://cdn.mos.cms.futurecdn.net/dP3N4qnEZ4tCTCLq59iysd.jpg')",
+            // backgroundImage: "url('https://cdn.mos.cms.futurecdn.net/dP3N4qnEZ4tCTCLq59iysd.jpg')",
+            backgroundColor: 'lightblue',
           }}>
           <div className={[styles.content, 'content'].join(' ')}>
             <h2 className={styles.title}>&quot;Lossless Youths&quot;</h2>
@@ -37,7 +38,8 @@ export default function Slider() {
         <ListItem
           className={[styles.item].join(' ')}
           style={{
-            backgroundImage: "url('https://i.redd.it/tc0aqpv92pn21.jpg')",
+            // backgroundImage: "url('https://i.redd.it/tc0aqpv92pn21.jpg')",
+            backgroundColor: 'white',
           }}>
           <div className={[styles.content, 'content'].join(' ')}>
             <h2 className={styles.title}>&quot;Estrange Bond&quot;</h2>
@@ -51,7 +53,8 @@ export default function Slider() {
         <ListItem
           className={[styles.item].join(' ')}
           style={{
-            backgroundImage: "url('https://wharferj.files.wordpress.com/2015/11/bio_north.jpg')",
+            // backgroundImage: "url('https://wharferj.files.wordpress.com/2015/11/bio_north.jpg')",
+            backgroundColor: 'lightblue',
           }}>
           <div className={[styles.content, 'content'].join(' ')}>
             <h2 className={styles.title}>&quot;The Gate Keeper&quot;</h2>
@@ -64,7 +67,10 @@ export default function Slider() {
         </ListItem>
         <ListItem
           className={[styles.item].join(' ')}
-          style={{ backgroundImage: "url('https://images7.alphacoders.com/878/878663.jpg')" }}>
+          style={{
+            // backgroundImage: "url('https://images7.alphacoders.com/878/878663.jpg')",
+            backgroundColor: 'lightblue',
+          }}>
           <div className={[styles.content, 'content'].join(' ')}>
             <h2 className={styles.title}>&quot;Last Trace Of Us&quot;</h2>
             <p className={styles.description}>
@@ -77,8 +83,9 @@ export default function Slider() {
         <ListItem
           className={[styles.item].join(' ')}
           style={{
-            backgroundImage:
-              "url('https://theawesomer.com/photos/2017/07/simon_stalenhag_the_electric_state_6.jpg')",
+            // backgroundImage:
+            //   "url('https://theawesomer.com/photos/2017/07/simon_stalenhag_the_electric_state_6.jpg')",
+            backgroundColor: 'lightblue',
           }}>
           <div className={[styles.content, 'content'].join(' ')}>
             <h2 className={styles.title}>&quot;Urban Decay&quot;</h2>
