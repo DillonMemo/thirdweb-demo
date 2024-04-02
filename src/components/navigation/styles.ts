@@ -3,20 +3,14 @@
 import styled from 'styled-components'
 
 export const Navigate = styled.header`
-  @media screen and (min-width: 1150px) {
-    .nav {
-      .nav-list {
-        flex-direction: row;
-        column-gap: 2.5rem;
-      }
-    }
-  }
-
   position: fixed;
   width: 100%;
   top: 0;
   left: 0;
-  background-color: transparent;
+  background-color: #0a0f1e;
+
+  height: 5rem;
+
   z-index: 100;
   .nav {
     display: flex;
@@ -24,23 +18,30 @@ export const Navigate = styled.header`
     justify-content: space-between;
     position: relative;
 
-    height: calc(3.5rem + 1rem);
-    padding: 1rem;
-
-    background-color: lightgray;
+    height: 100%;
+    padding: 0 0 0 5rem;
 
     .nav-logo {
-      color: hsl(28, 88%, 62%);
-      transition: color 0.4s;
-      font-size: 1.25rem;
+      .logo {
+        color: hsl(28, 88%, 62%);
+        transition: color 0.4s;
+        font-size: 1.25rem;
+      }
     }
 
     .nav-menu {
+      flex: 1;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      padding: 0rem 5rem;
       .nav-mobile-profile {
         display: none;
       }
       .nav-list {
         display: flex;
+        flex-direction: row;
+        column-gap: 2.5rem;
 
         .nav-item {
           .nav-link {
@@ -61,50 +62,76 @@ export const Navigate = styled.header`
       font-size: 1.5rem;
       color: hsl(0, 0%, 95%);
       cursor: pointer;
+
+      &.hamburger {
+        width: 1.5rem;
+        height: 1.5rem;
+
+        .bar {
+          display: block;
+          margin: auto;
+          background-color: white;
+          width: 100%;
+          height: 3px;
+          border-radius: 0.3125rem;
+          transition: all 0.5s ease;
+        }
+
+        &:hover {
+          .bar:first-child {
+            transform: translateY(-1px);
+          }
+          .bar:last-child {
+            transform: translateY(1px);
+          }
+        }
+
+        &.is-opened {
+          .bar {
+            &:first-child {
+              transform: translateY(10px) rotate(45deg);
+            }
+            &:nth-child(2) {
+              transform: scaleX(0);
+            }
+            &:last-child {
+              transform: translateY(-6px) rotate(-45deg);
+            }
+          }
+        }
+      }
     }
 
-    .hamburger {
-      width: 1.5rem;
-      height: 1.5rem;
+    .nav-pc-profile {
+      flex-basis: 30%;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 0.5rem;
 
-      .bar {
-        display: block;
-        margin: auto;
-        background-color: white;
-        width: 100%;
-        height: 3px;
-        border-radius: 0.3125rem;
-        transition: all 0.5s ease;
+      height: 100%;
+      background: linear-gradient(105deg, transparent 5%, #191f31 0%);
+
+      padding-right: 5rem;
+
+      > .translate-wrap {
+        user-select: none;
+        display: inline-flex;
+        align-items: center;
+        svg {
+          margin-right: 0.125rem;
+        }
+        span {
+          font-size: 1rem;
+        }
       }
-
-      &:hover {
-        .bar:first-child {
-          transform: translateY(-1px);
-        }
-        .bar:last-child {
-          transform: translateY(1px);
-        }
-      }
-
-      &.is-opened {
-        .bar {
-          &:first-child {
-            transform: translateY(10px) rotate(45deg);
-          }
-          &:nth-child(2) {
-            transform: scaleX(0);
-          }
-          &:last-child {
-            transform: translateY(-6px) rotate(-45deg);
-          }
-        }
+      > .profile-wrap {
       }
     }
   }
   // Mobile + Tablat
   @media (max-width: 1150px) {
     .nav {
-      height: 3.5rem;
       .nav-menu {
         background-color: lightblue;
         backdrop-filter: blur(16px);
