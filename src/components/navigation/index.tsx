@@ -73,7 +73,6 @@ export default function Navigation() {
               </Link>
             </li>
           </ul>
-          {/* <div className="nav-close">&#x2715;</div> */}
         </div>
 
         <div className="nav-pc-profile">

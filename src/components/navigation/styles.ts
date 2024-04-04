@@ -129,8 +129,8 @@ export const Navigate = styled.header`
       }
     }
   }
-  // Mobile + Tablat
-  @media (max-width: 1150px) {
+  // Mobile
+  @media (max-width: 700px) {
     .nav {
       .nav-menu {
         background-color: lightblue;
