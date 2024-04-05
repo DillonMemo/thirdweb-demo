@@ -107,7 +107,7 @@ export const Navigate = styled.header`
       display: flex;
       align-items: center;
       justify-content: flex-end;
-      gap: 0.5rem;
+      gap: 1.5rem;
 
       height: 100%;
       background: linear-gradient(105deg, transparent 5%, #191f31 0%);

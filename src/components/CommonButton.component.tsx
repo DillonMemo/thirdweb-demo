@@ -1,19 +1,28 @@
 'use client'
 
 import { CSSProperties } from 'react'
-import { omit } from 'lodash'
 import styled from 'styled-components'
 
 interface Props extends React.HTMLAttributes<HTMLButtonElement> {
   width?: CSSProperties['width']
   height?: CSSProperties['height']
   fontSize?: CSSProperties['fontSize']
+  fontWeight?: CSSProperties['fontWeight']
+  isBorder?: boolean
 }
 
 const CommonButton: React.FC<Props> = (props) => {
-  const { children, width = '6rem', height = '2.5rem' } = props
+  const {
+    children,
+    width = '6rem',
+    height = '2.5rem',
+    fontSize,
+    fontWeight = 'normal',
+    isBorder = false,
+    color,
+  } = props
   return (
-    <ButtonWrapper width={width} height={height} {...omit(props, ['width', 'height', 'children'])}>
+    <ButtonWrapper {...{ width, height, fontSize, fontWeight, isBorder, color }}>
       <span className="btn-top"></span>
       <span className="btn-right"></span>
       <span className="btn-bottom"></span>
@@ -31,12 +40,12 @@ const ButtonWrapper = styled.button<Props>`
   border: none;
   outline: none;
 
-  color: #ffffff;
-  font-weight: 700;
+  color: ${({ color }) => (color ? color : `var(--primary-color)`)};
+  font-weight: ${({ fontWeight }) => fontWeight};
   font-size: ${({ fontSize }) => fontSize};
   text-decoration: none;
   text-align: center;
-  letter-spacing: 1px;
+  letter-spacing: 0;
 
   background-color: transparent;
 
@@ -51,34 +60,45 @@ const ButtonWrapper = styled.button<Props>`
   overflow: hidden;
   transition: color 0.2s ease;
 
-  &:hover,
-  &:focus {
-    color: blueviolet;
-
+  &:hover {
     > .btn-top,
     > .btn-bottom {
-      height: 0.125rem;
+      height: 0.09375rem;
     }
     > .btn-right,
     > .btn-left {
-      width: 0.125rem;
+      width: 0.09375rem;
+
+      ${({ isBorder }) =>
+        !isBorder &&
+        `
+        background: var(--primary-color);
+      `}
     }
     span.btn-top,
     span.btn-bottom {
-      background: linear-gradient(to right, #f05d5e 15%, transparent 15% 85%, #f05d5e 85%);
+      background: linear-gradient(
+        to right,
+        var(--primary-color) 10%,
+        transparent 10% 90%,
+        var(--primary-color) 90%
+      );
     }
   }
 
   > span {
-    /* transition: background 0.3s ease-in; */
-
     &.btn-top,
     &.btn-right,
     &.btn-bottom,
     &.btn-left {
       position: absolute;
       display: block;
-      background: #f05d5e;
+      ${({ isBorder }) =>
+        isBorder
+          ? `
+        background: var(--primary-color);
+      `
+          : `background: transparent`};
     }
     &.btn-top,
     &.btn-bottom {

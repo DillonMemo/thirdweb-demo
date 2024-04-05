@@ -44,32 +44,39 @@ export default function Navigation() {
           <ul className="nav-list">
             <li className="nav-item">
               <Link href="/sub" className="nav-link">
-                Home
+                <CommonButton fontSize={'1rem'} fontWeight={300} color="var(--text-color)">
+                  HOME
+                </CommonButton>
               </Link>
             </li>
             <li className="nav-item">
               <Link href="/sub" className="nav-link">
-                Page1
+                MATCHES
               </Link>
             </li>
             <li className="nav-item">
               <Link href="/sub" className="nav-link">
-                Page2
+                TOURNAMENTS
               </Link>
             </li>
             <li className="nav-item">
               <Link href="/sub" className="nav-link">
-                Page3
+                TEAMS
               </Link>
             </li>
             <li className="nav-item">
               <Link href="/sub" className="nav-link">
-                Page4
+                WATCHLIST
               </Link>
             </li>
             <li className="nav-item">
               <Link href="/sub" className="nav-link">
-                Page5
+                LEADERBOARDS
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link href="/sub" className="nav-link">
+                REWARDS
               </Link>
             </li>
           </ul>
@@ -81,7 +88,7 @@ export default function Navigation() {
             <span>English</span>
           </div>
           <div className="profile-wrap">
-            <CommonButton>Login</CommonButton>
+            <CommonButton isBorder>Login</CommonButton>
           </div>
         </div>
         <div className="nav-toggle hamburger" onClick={onToggle}>
