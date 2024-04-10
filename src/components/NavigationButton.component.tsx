@@ -68,8 +68,14 @@ const ButtonWrapper = styled.button<Props>`
   }
 
   ${md} {
+    padding: 0;
     font-size: 1.125rem;
     height: 1.4375rem;
+    color: var(--text-color);
+
+    &:hover {
+      padding: 0 0.75rem;
+    }
   }
 
   &:hover {
@@ -91,6 +97,15 @@ const ButtonWrapper = styled.button<Props>`
         transparent 10% 90%,
         var(--primary-color) 90%
       );
+
+      ${md} {
+        background: linear-gradient(
+          to right,
+          var(--primary-color) 5%,
+          transparent 5% 95%,
+          var(--primary-color) 95%
+        );
+      }
     }
   }
 

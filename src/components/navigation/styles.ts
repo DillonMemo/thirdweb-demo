@@ -1,10 +1,21 @@
 'use client'
 
 import { lg, md } from '@/styles'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 const headerHeight = '5rem'
 const headerBackgroundColor = '#0a0f1e'
+const translateCss = css`
+  user-select: none;
+  display: inline-flex;
+  align-items: center;
+  svg {
+    margin-right: 0.125rem;
+  }
+  span {
+    font-size: 0.75rem;
+  }
+`
 export const Navigate = styled.header`
   position: fixed;
   width: 100%;
@@ -41,8 +52,8 @@ export const Navigate = styled.header`
       height: 100%;
       display: flex;
       align-items: center;
-      justify-content: center;
-      padding: 0 5rem;
+      justify-content: flex-start;
+      padding: 0 2.875rem;
 
       ${lg} {
         padding: 0 1.5rem;
@@ -67,6 +78,9 @@ export const Navigate = styled.header`
           }
         }
       }
+      .nav-mobile-services {
+        display: none;
+      }
     }
 
     .nav-toggle {
@@ -86,7 +100,7 @@ export const Navigate = styled.header`
           width: 100%;
           height: 3px;
           border-radius: 0.3125rem;
-          transition: all 0.5s ease;
+          transition: all 0.6s ease;
         }
 
         &:hover {
@@ -130,16 +144,8 @@ export const Navigate = styled.header`
         padding-right: 1rem;
       }
 
-      > .translate-wrap {
-        user-select: none;
-        display: inline-flex;
-        align-items: center;
-        svg {
-          margin-right: 0.125rem;
-        }
-        span {
-          font-size: 0.75rem;
-        }
+      > .translate-pc-wrap {
+        ${translateCss}
       }
       > .profile-wrap {
       }
@@ -158,7 +164,6 @@ export const Navigate = styled.header`
         display: flex;
         flex-flow: column nowrap;
         align-items: initial;
-        justify-content: flex-start;
 
         background-color: #0d1426;
         backdrop-filter: blur(16px);
@@ -166,7 +171,8 @@ export const Navigate = styled.header`
         width: 80%;
         height: 100%;
         padding: 0;
-        transition: right 0.4s;
+        border-right: 1px solid #333b45;
+        transition: left 0.4s;
 
         position: fixed;
         top: 0;
@@ -181,16 +187,57 @@ export const Navigate = styled.header`
           display: block;
 
           .nav-mobile-header {
+            padding: 0 0 0 1rem;
+            display: flex;
+            flex-flow: row nowrap;
+            align-items: center;
+            justify-content: space-between;
+
             height: ${headerHeight};
             max-height: ${headerHeight};
 
             background-color: ${headerBackgroundColor};
+
+            .close {
+              flex-basis: 5rem;
+
+              height: 100%;
+              background: linear-gradient(105deg, transparent 25%, #191f31 0%);
+            }
+          }
+
+          .nav-mobile-account {
+            display: flex;
+            justify-content: center;
+
+            padding: 1rem;
+            border-bottom: 1px solid #333b45;
           }
         }
 
         .nav-list {
+          flex: 3;
           flex-direction: column;
           row-gap: 2.5rem;
+
+          padding: 0 1rem;
+          margin: 1.5rem 0;
+        }
+
+        .nav-mobile-services {
+          flex: 1;
+          display: flex;
+          flex-flow: column nowrap;
+
+          padding: 0 1rem;
+
+          > .translate-mobile-wrap {
+            ${translateCss}
+            > span {
+              font-size: 1rem;
+              line-height: 1.5rem;
+            }
+          }
         }
       }
 

@@ -1,6 +1,5 @@
 'use client'
 
-import { Bounce, toast } from 'react-toastify'
 import { ConnectButton, ConnectButtonProps } from 'thirdweb/react'
 import { Wallet, embeddedWallet } from 'thirdweb/wallets'
 import { AccountStateType } from '@/recoil/account/type'
@@ -9,9 +8,11 @@ import { ThirdwebClient } from 'thirdweb'
 import UserProfile from '../../public/svgs/UserProfile'
 import { accountState } from '@/recoil/account'
 import { defaultPalette } from '@/styles'
+import { getUserEmail } from 'thirdweb/wallets/embedded'
 import styled from 'styled-components'
+import { toast } from 'react-toastify'
 import { useCallback } from 'react'
-import { useRecoilValue } from 'recoil'
+import { useRecoilState } from 'recoil'
 
 interface Props extends Pick<ConnectButtonProps, 'connectButton' | 'detailsButton'> {
   locale: LocaleType
@@ -23,16 +24,20 @@ export default function CustomConnectWallet({
   detailsButton,
   locale,
 }: Props) {
-  const account = useRecoilValue(accountState)
-  // eslint-disable-next-line no-console
-  console.log('account', account)
-  const onConnect = useCallback((wallet: Wallet) => {
-    // eslint-disable-next-line no-console
-    console.log('onConnect', wallet)
-    toast.success('Successed connect to wallet', {
-      transition: Bounce,
-      position: 'top-center',
-    })
+  const [account, setAccount] = useRecoilState(accountState)
+  const onConnect = useCallback(async (wallet: Wallet) => {
+    try {
+      const email = await getUserEmail({ client })
+      setAccount((prev) => ({
+        ...prev,
+        ...(email && { email, nickname: email.split('@')[0] }),
+        wallet,
+      }))
+      toast.success('Successed connect to wallet')
+    } catch (error) {
+      toast.error('Failed connect to wallet')
+      console.error(error)
+    }
   }, [])
 
   /**
