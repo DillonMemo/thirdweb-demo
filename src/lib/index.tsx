@@ -15,7 +15,7 @@ export default function RootProvider({
   const messages = useMessages()
   return (
     <NextIntlClientProvider locale={locale} messages={messages}>
-      <ThirdProvider locale={locale}>
+      <ThirdProvider>
         <RecoilProvider>
           <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
         </RecoilProvider>

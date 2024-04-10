@@ -1,13 +1,16 @@
 :root {
   --foreground-rgb: 0, 0, 0;
+  --background-color: #0d1426;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
-  
-  --primary-color: #80BAD6;
-  --text-color: #A9A9A9;
+
+  --primary-color: #80bad6;
+  --text-color: #a9a9a9;
+  --text-light-color: rgb(210, 210, 210);
   --white-opacity-95-bg: rgba(255, 255, 255, 0.05);
 
   --border-radius: 0.75rem;
+
   /* --primary-glow: conic-gradient(
     from 180deg at 50% 50%,
     #16abff33 0deg,
@@ -36,10 +39,6 @@
     --foreground-rgb: 255, 255, 255;
     --background-start-rgb: 0, 0, 0;
     --background-end-rgb: 0, 0, 0;
-
-    --primary-color: #80BAD6;
-    --text-color: #A9A9A9;
-    --white-opacity-95-bg: rgba(255, 255, 255, 0.05);
 
     /* --primary-glow: radial-gradient(rgba(1, 65, 255, 0.4), rgba(1, 65, 255, 0));
     --secondary-glow: linear-gradient(
@@ -81,8 +80,8 @@ body[data-scroll-locked] {
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb)))
-    rgb(var(--background-start-rgb));
+
+  background: var(--background-color);
 }
 
 ul {
@@ -120,50 +119,62 @@ a {
 }
 
 /* ========= Thirdweb connect wallet modal ========= */
-.css-k23hpx > div {
+.css-1gr9rlz > div {
   background: url('https://i.redd.it/tc0aqpv92pn21.jpg') center / cover no-repeat;
 }
 
 /* Left side of the Thirdweb connect wallet modal > 묶지않으면 여러개가 선택됩니다. */
-.css-k23hpx > div .css-1exidmz {
+.css-1gr9rlz > div .css-1exidmz {
   border-right: none;
 }
-.css-k23hpx > div .css-1exidmz > .css-1d4s0we > .css-16upjj0 {
+.css-1gr9rlz > div .css-1exidmz > .css-1d4s0we > .css-16upjj0 {
   border-top: none;
 }
 
 /* Right side of the Thirdweb connect wallet modal */
-.css-k23hpx > div .css-1d4s0we span.css-14k66z6 {
+.css-1gr9rlz > div .css-1d4s0we span.css-14k66z6 {
   color: hsl(255, 3.4%, 87.7%);
 }
-.css-k23hpx > div .css-1d4s0we button.css-ln0jr3 {
+.css-1gr9rlz > div .css-1d4s0we div.css-g1n4ty {
+  color: white;
+}
+.css-1gr9rlz > div .css-1d4s0we button.css-1kmmjrb,
+.css-1gr9rlz > div .css-1d4s0we button.css-pqh1px {
   border-color: white;
 }
-.css-k23hpx > div .css-1d4s0we button.css-ln0jr3:hover {
+.css-1gr9rlz > div .css-1d4s0we button.css-pqh1px > div.css-dxkbqc {
+  color: white;
+}
+.css-1gr9rlz > div .css-1d4s0we button.css-1kmmjrb:hover {
   border-color: #3385ff;
 }
-.css-k23hpx > div .css-1d4s0we > div.css-u5lkp0:before,
-.css-k23hpx > div .css-1d4s0we > div.css-u5lkp0:after {
+.css-1gr9rlz > div .css-1d4s0we > div.css-z2f0ls:before,
+.css-1gr9rlz > div .css-1d4s0we > div.css-z2f0ls:after,
+.css-1gr9rlz > div .css-1d4s0we > div.css-z2f0ls > span {
   border-color: white;
+  color: white;
 }
-.css-k23hpx > div .css-1d4s0we input[type='email'] {
+.css-1gr9rlz > div .css-1d4s0we input[type='email'] {
   box-shadow: 0 0 0 1.5px white;
 }
-.css-k23hpx > div .css-1d4s0we input[type='email']:focus {
+.css-1gr9rlz > div .css-1d4s0we input[type='email']:focus {
   box-shadow: 0 0 0 2px #3385ff;
 }
-.css-k23hpx > div .css-1d4s0we input[type='email']::placeholder {
+.css-1gr9rlz > div .css-1d4s0we input[type='email']::placeholder {
   color: lightgray;
 }
-.css-k23hpx > div .css-1d4s0we .css-k5jmq8 {
+.css-1gr9rlz > div .css-1d4s0we .css-19tx5fh {
   background-color: rgba(0, 0, 0, 0.5);
   border-radius: 0.5rem;
 }
-.css-k23hpx > div .css-1d4s0we:has(> a.css-k4d0e1) {
+.css-1gr9rlz > div .css-1d4s0we:has(> a.css-1wcqaod) {
   display: none !important;
 }
 
 /* x 버튼입니다 */
-.css-k23hpx .css-sj80wb {
+.css-1gr9rlz .css-sj80wb {
   background: none !important;
+}
+.css-1gr9rlz .css-sj80wb > button {
+  color: white;
 }

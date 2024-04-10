@@ -1,15 +1,18 @@
 'use client'
 
+import { lg, md } from '@/styles'
 import styled from 'styled-components'
 
+const headerHeight = '5rem'
+const headerBackgroundColor = '#0a0f1e'
 export const Navigate = styled.header`
   position: fixed;
   width: 100%;
   top: 0;
   left: 0;
-  background-color: #0a0f1e;
+  background-color: ${headerBackgroundColor};
 
-  height: 5rem;
+  height: ${headerHeight};
 
   z-index: 100;
   .nav {
@@ -19,7 +22,11 @@ export const Navigate = styled.header`
     position: relative;
 
     height: 100%;
-    padding: 0 0 0 5rem;
+    padding: 0 0 0 3rem;
+
+    ${lg} {
+      padding: 0 0 0 1rem;
+    }
 
     .nav-logo {
       .logo {
@@ -34,19 +41,24 @@ export const Navigate = styled.header`
       height: 100%;
       display: flex;
       align-items: center;
-      padding: 0rem 5rem;
+      justify-content: center;
+      padding: 0 5rem;
+
+      ${lg} {
+        padding: 0 1.5rem;
+      }
+
       .nav-mobile-profile {
         display: none;
       }
       .nav-list {
         display: flex;
         flex-direction: row;
-        column-gap: 2.5rem;
+        column-gap: 1rem;
 
         .nav-item {
           .nav-link {
             color: hsl(0, 0%, 95%);
-            font-weight: 600;
             transition: color 0.4s;
 
             &:hover {
@@ -112,7 +124,11 @@ export const Navigate = styled.header`
       height: 100%;
       background: linear-gradient(105deg, transparent 5%, #191f31 0%);
 
-      padding-right: 5rem;
+      padding-right: 3rem;
+
+      ${lg} {
+        padding-right: 1rem;
+      }
 
       > .translate-wrap {
         user-select: none;
@@ -122,7 +138,7 @@ export const Navigate = styled.header`
           margin-right: 0.125rem;
         }
         span {
-          font-size: 1rem;
+          font-size: 0.75rem;
         }
       }
       > .profile-wrap {
@@ -130,28 +146,46 @@ export const Navigate = styled.header`
     }
   }
   // Mobile
-  @media (max-width: 700px) {
+  ${md} {
     .nav {
+      padding: 0 1rem;
+
+      &:has(> .nav-menu.show-menu) {
+        width: 80%;
+      }
+
       .nav-menu {
-        background-color: lightblue;
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: initial;
+        justify-content: flex-start;
+
+        background-color: #0d1426;
         backdrop-filter: blur(16px);
         -webkit-backdrop-filter: blur(16px);
         width: 80%;
         height: 100%;
-        padding: 6rem 3rem 0;
+        padding: 0;
         transition: right 0.4s;
 
         position: fixed;
         top: 0;
         &:not(.show-menu) {
-          right: -100%;
+          left: -100%;
         }
         &.show-menu {
-          right: 0;
+          left: 0;
         }
 
         .nav-mobile-profile {
           display: block;
+
+          .nav-mobile-header {
+            height: ${headerHeight};
+            max-height: ${headerHeight};
+
+            background-color: ${headerBackgroundColor};
+          }
         }
 
         .nav-list {

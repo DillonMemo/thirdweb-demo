@@ -1,28 +1,28 @@
 'use client'
 
+import { lg, md } from '@/styles'
 import { CSSProperties } from 'react'
 import styled from 'styled-components'
 
 interface Props extends React.HTMLAttributes<HTMLButtonElement> {
   width?: CSSProperties['width']
-  height?: CSSProperties['height']
-  fontSize?: CSSProperties['fontSize']
   fontWeight?: CSSProperties['fontWeight']
-  isBorder?: boolean
+  $isBorder?: boolean
+  $colorSet?: string[]
+  letterSpacing?: 'normal' | 'tight' | 'wide'
 }
 
-const CommonButton: React.FC<Props> = (props) => {
+const NavigationButton: React.FC<Props> = (props) => {
   const {
     children,
-    width = '6rem',
-    height = '2.5rem',
-    fontSize,
+    width,
     fontWeight = 'normal',
-    isBorder = false,
-    color,
+    $isBorder = false,
+    $colorSet = ['#ffffff', 'var(--primary-color)'],
+    letterSpacing = 'normal',
   } = props
   return (
-    <ButtonWrapper {...{ width, height, fontSize, fontWeight, isBorder, color }}>
+    <ButtonWrapper {...{ width, fontWeight, $isBorder, $colorSet, letterSpacing }}>
       <span className="btn-top"></span>
       <span className="btn-right"></span>
       <span className="btn-bottom"></span>
@@ -36,21 +36,23 @@ const ButtonWrapper = styled.button<Props>`
   cursor: pointer;
 
   margin: 0;
-  padding: 0;
+  padding: 0 1rem;
   border: none;
   outline: none;
 
-  color: ${({ color }) => (color ? color : `var(--primary-color)`)};
+  ${({ $colorSet }) => $colorSet && `color: ${$colorSet[0]}`};
   font-weight: ${({ fontWeight }) => fontWeight};
-  font-size: ${({ fontSize }) => fontSize};
+  font-size: 1rem;
+  font-family: var(--font-pretendard-std);
   text-decoration: none;
   text-align: center;
-  letter-spacing: 0;
+  letter-spacing: ${({ letterSpacing }) =>
+    letterSpacing === 'normal' ? 'normal' : letterSpacing === 'tight' ? '-0.625px' : '1.2px'};
 
   background-color: transparent;
 
   width: ${({ width }) => width};
-  height: ${({ height }) => height};
+  height: 2.375rem;
 
   position: relative;
 
@@ -60,17 +62,23 @@ const ButtonWrapper = styled.button<Props>`
   overflow: hidden;
   transition: color 0.2s ease;
 
+  ${lg} {
+    padding: 0 0.5rem;
+    font-size: 0.75rem;
+  }
+
+  ${md} {
+    font-size: 1.125rem;
+    height: 1.4375rem;
+  }
+
   &:hover {
-    > .btn-top,
-    > .btn-bottom {
-      height: 0.09375rem;
-    }
+    ${({ $colorSet }) => $colorSet && `color: ${$colorSet[1]}`};
+    font-weight: 500;
     > .btn-right,
     > .btn-left {
-      width: 0.09375rem;
-
-      ${({ isBorder }) =>
-        !isBorder &&
+      ${({ $isBorder }) =>
+        !$isBorder &&
         `
         background: var(--primary-color);
       `}
@@ -93,8 +101,8 @@ const ButtonWrapper = styled.button<Props>`
     &.btn-left {
       position: absolute;
       display: block;
-      ${({ isBorder }) =>
-        isBorder
+      ${({ $isBorder }) =>
+        $isBorder
           ? `
         background: var(--primary-color);
       `
@@ -129,4 +137,4 @@ const ButtonWrapper = styled.button<Props>`
   }
 `
 
-export default CommonButton
+export default NavigationButton
