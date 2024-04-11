@@ -39,6 +39,11 @@ export default function Navigation() {
     }
   }, [])
 
+  const onLogoClick = useCallback(() => {
+    const close = document.querySelector('.hamburger.is-opened')
+    close instanceof HTMLDivElement && close.click()
+  }, [])
+
   return (
     <Navigate>
       <nav className="nav container">
@@ -52,7 +57,7 @@ export default function Navigation() {
           <div className="nav-mobile-profile">
             <div className="nav-mobile-header">
               <div className="nav-logo">
-                <Link href={'/'} locale={locale} className="logo">
+                <Link href={'/'} locale={locale} className="logo" onClick={onLogoClick}>
                   <Image src={Logo} alt="logo-image" width={150} />
                 </Link>
               </div>

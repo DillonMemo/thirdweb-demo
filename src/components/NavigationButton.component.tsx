@@ -1,7 +1,7 @@
 'use client'
 
+import { CSSProperties, useCallback } from 'react'
 import { lg, md } from '@/styles'
-import { CSSProperties } from 'react'
 import styled from 'styled-components'
 
 interface Props extends React.HTMLAttributes<HTMLButtonElement> {
@@ -21,8 +21,15 @@ const NavigationButton: React.FC<Props> = (props) => {
     $colorSet = ['#ffffff', 'var(--primary-color)'],
     letterSpacing = 'normal',
   } = props
+
+  const onNavClick = useCallback(() => {
+    const close = document.querySelector('.hamburger.is-opened')
+    close instanceof HTMLDivElement && close.click()
+  }, [])
   return (
-    <ButtonWrapper {...{ width, fontWeight, $isBorder, $colorSet, letterSpacing }}>
+    <ButtonWrapper
+      {...{ width, fontWeight, $isBorder, $colorSet, letterSpacing }}
+      onClick={onNavClick}>
       <span className="btn-top"></span>
       <span className="btn-right"></span>
       <span className="btn-bottom"></span>
