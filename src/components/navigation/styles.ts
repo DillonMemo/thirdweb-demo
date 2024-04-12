@@ -25,6 +25,8 @@ export const Navigate = styled.header`
 
   height: ${headerHeight};
 
+  box-shadow: 0 0 #0000, 0 0 #0000, 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+
   z-index: 100;
   .nav {
     display: flex;
