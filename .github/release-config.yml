@@ -5,6 +5,7 @@ categories:
     labels:
       - 'feature'
       - 'enhancement'
+      - 'implement'
   - title: '🔨 Bug Fixes'
     labels:
       - 'fix'
@@ -19,6 +20,7 @@ categories:
       - 'deploy'
 change-template: '- $TITLE @$AUTHOR (#$NUMBER)'
 change-title-escapes: '\<*_&' # You can add # and @ to disable mentions, and add ` to disable code blocks.
+no-changes-template: 'There are no changes.'
 version-resolver:
   major:
     labels:
@@ -34,3 +36,5 @@ template: |
   ## Changes
 
   $CHANGES
+  ---
+  $CONTRIBUTORS
