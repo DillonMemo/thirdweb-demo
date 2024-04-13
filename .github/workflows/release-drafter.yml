@@ -39,9 +39,11 @@ jobs:
           to: ${{ secrets.TELEGRAM_CHAT_ID }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
           format: markdown
+          url
           message: |
             *Update release draft*
-            >📖 Repository: ${{ github.repository }}
+            📖 Repository: ${{ github.repository }}
 
-            Release URL: [${{ steps.release_drafter.outputs.name }}](${{ steps.release_drafter.outputs.html_url }})
+            👉 Release Note URL: [${{ steps.release_drafter.outputs.name }}](${{ steps.release_drafter.outputs.html_url }})
+            👉 Demo site URL: [Visit our website](https://thirdweb-demo-puce.vercel.app)
           # args: Push 테스트중
