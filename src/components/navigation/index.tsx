@@ -133,7 +133,7 @@ export default function Navigation() {
 
         <div className="nav-pc-profile">
           <div className="translate-pc-wrap">
-            <Language width="1rem" height="1rem" />
+            <Language width="1.25rem" height="1.25rem" />
             <span>{locale === 'ja' ? '日本語' : 'English'}</span>
           </div>
           <div className="profile-wrap">
