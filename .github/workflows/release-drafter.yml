@@ -41,7 +41,7 @@ jobs:
           format: markdown
           message: |
             *Update release draft*
-            > 📖 Repository: ${{ github.repository }}
+            >📖 Repository: ${{ github.repository }}
 
             Release URL: [${{ steps.release_drafter.outputs.name }}](${{ steps.release_drafter.outputs.html_url }})
           # args: Push 테스트중
