@@ -1,22 +1,3 @@
-# name: Release Drafter
-# on:
-#   push:
-#     # 해당 브랜치에 푸쉬될 때 action 이 실행된다.
-#     branches:
-#       - main
-# jobs:
-#   update_release_draft:
-#     runs-on: ubuntu-latest
-#     steps:
-#       - uses: release-drafter/release-drafter@v5
-#         # (Optional)
-#         # workflow 에서 여러 구성이 필요할 때 config-name 에 오버라이드 해줍니다.
-#         # 반드시 .github/ 에 위치해야합니다.
-#         with:
-#           config-name: release-config.yml
-#         env:
-#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
 name: Release Drafter
 on:
   push:
@@ -38,15 +19,23 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - uses: release-drafter/release-drafter@v5
+      - name: release drafter
+        id: release_drafter
+        uses: release-drafter/release-drafter@v5
         with:
           config-name: release-config.yml
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Get draft release information
+        id: get_release_information
+        run: |
+          echo "Release HTML URL: ${{ steps.release_drafter.outputs.html_url  }}"
+          echo "Release ID: ${{ steps.release_drafter.outputs.id  }}"
 
       - name: send custom message with args
         uses: appleboy/telegram-action@master
         with:
           to: ${{ secrets.TELEGRAM_CHAT_ID }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
-          args: Push 테스트 반영
+          args: Push 테스트중
