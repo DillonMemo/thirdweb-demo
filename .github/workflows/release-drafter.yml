@@ -38,4 +38,9 @@ jobs:
         with:
           to: ${{ secrets.TELEGRAM_CHAT_ID }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
-          args: Push 테스트중
+          message: |
+            ### Update release draft
+            📖 Repository: ${{ github.repository }}
+
+            Release URL: [${{ steps.release_drafter.outputs.name }}](${{ steps.release_drafter.outputs.html_url }})
+          # args: Push 테스트중
