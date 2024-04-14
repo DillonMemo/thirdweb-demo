@@ -39,7 +39,6 @@ jobs:
           to: ${{ secrets.TELEGRAM_CHAT_ID }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
           format: markdown
-          url: ${{ steps.release_drafter.outputs.html_url }}
           message: |
             *Update release draft*
             📖 Repository: ${{ github.repository }}

@@ -3,7 +3,6 @@
 import { lg, md } from '@/styles'
 import styled, { css } from 'styled-components'
 
-const headerHeight = '5rem'
 const headerBackgroundColor = '#0a0f1e'
 const translateCss = css`
   user-select: none;
@@ -23,9 +22,13 @@ export const Navigate = styled.header`
   left: 0;
   background-color: ${headerBackgroundColor};
 
-  height: ${headerHeight};
+  height: var(--header-static-height);
 
-  box-shadow: 0 0 #0000, 0 0 #0000, 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  box-shadow:
+    0 0 #0000,
+    0 0 #0000,
+    0 1px 3px 0 rgb(0 0 0 / 0.1),
+    0 1px 2px -1px rgb(0 0 0 / 0.1);
 
   z-index: 100;
   .nav {
@@ -195,8 +198,8 @@ export const Navigate = styled.header`
             align-items: center;
             justify-content: space-between;
 
-            height: ${headerHeight};
-            max-height: ${headerHeight};
+            height: var(--header-static-height);
+            max-height: var(--header-static-height);
 
             background-color: ${headerBackgroundColor};
 

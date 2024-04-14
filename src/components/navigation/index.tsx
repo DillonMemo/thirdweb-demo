@@ -46,7 +46,7 @@ export default function Navigation() {
 
   return (
     <Navigate>
-      <nav className="nav container">
+      <nav className="nav">
         <div className="nav-logo">
           <Link href={'/'} locale={locale} className="logo">
             <Image src={Logo} alt="logo-image" width={150} />
