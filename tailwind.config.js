@@ -9,6 +9,15 @@ module.exports = {
     './src/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
+    screens: {
+      xxs: { max: '512px' },
+      xs: { max: '608px' },
+      sm: { max: '768px' },
+      md: { max: '992px' },
+      lg: { max: '1280px' },
+      xl: { max: '1440px' },
+      xxl: { max: '1920px' },
+    },
     extend: {},
   },
   plugins: [],
