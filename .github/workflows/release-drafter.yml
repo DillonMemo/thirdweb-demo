@@ -1,8 +1,10 @@
 name: Release Drafter
 on:
   push:
-    branches:
-      - main
+    # branches:
+    #   - main
+    release:
+      types: [published]
 
 permissions:
   contents: read
@@ -40,6 +42,7 @@ jobs:
           token: ${{ secrets.TELEGRAM_TOKEN }}
           format: markdown
           message: |
+            테스트 중입니다. - code: release published
             *Update release draft*
             📖 Repository: ${{ github.repository }}
 
