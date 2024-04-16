@@ -13,14 +13,7 @@ interface Props extends React.HTMLAttributes<HTMLButtonElement> {
 }
 
 const NavigationButton: React.FC<Props> = (props) => {
-  const {
-    children,
-    width,
-    fontWeight = 'normal',
-    $isBorder = false,
-    $colorSet = ['#ffffff', 'var(--primary-color)'],
-    letterSpacing = 'normal',
-  } = props
+  const { children, width, $isBorder = false, letterSpacing = 'normal' } = props
 
   const onNavClick = useCallback(() => {
     const close = document.querySelector('.hamburger.is-opened')
@@ -28,7 +21,8 @@ const NavigationButton: React.FC<Props> = (props) => {
   }, [])
   return (
     <ButtonWrapper
-      {...{ width, fontWeight, $isBorder, $colorSet, letterSpacing }}
+      {...{ width, $isBorder, letterSpacing }}
+      className="font-light text-gray-900 hover:font-medium dark:text-white"
       onClick={onNavClick}>
       <span className="btn-top"></span>
       <span className="btn-right"></span>
@@ -47,8 +41,6 @@ const ButtonWrapper = styled.button<Props>`
   border: none;
   outline: none;
 
-  ${({ $colorSet }) => $colorSet && `color: ${$colorSet[0]}`};
-  font-weight: ${({ fontWeight }) => fontWeight};
   font-size: 1rem;
   font-family: var(--font-pretendard-std);
   text-decoration: none;
@@ -78,7 +70,6 @@ const ButtonWrapper = styled.button<Props>`
     padding: 0;
     font-size: 1.125rem;
     height: 1.4375rem;
-    color: var(--text-color);
 
     &:hover {
       padding: 0 0.75rem;
@@ -86,8 +77,6 @@ const ButtonWrapper = styled.button<Props>`
   }
 
   &:hover {
-    ${({ $colorSet }) => $colorSet && `color: ${$colorSet[1]}`};
-    font-weight: 500;
     > .btn-right,
     > .btn-left {
       ${({ $isBorder }) =>

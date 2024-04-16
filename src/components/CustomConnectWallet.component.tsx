@@ -65,7 +65,7 @@ export default function CustomConnectWallet({
       detailsButton={{
         ...detailsButton,
         render: () => (
-          <DetailButton className={`${detailsButton?.className}`}>
+          <DetailButton className={`${detailsButton?.className} rounded-xl`}>
             <div className="detail-image-wrap">
               <UserProfile />
             </div>
@@ -79,8 +79,10 @@ export default function CustomConnectWallet({
       connectModal={{
         size: 'wide',
         title: 'Sample Modal Title',
-        titleIcon:
-          'https://polygon.miracleplay.gg/static/media/miracle-wallet-logo.fc4f85e929ed4f42ffba971f031e0c0b.svg',
+        /** @example */
+        titleIcon: 'https://marineinsurer.co.uk/wp-content/uploads/2020/05/logo-dummy.png',
+        // titleIcon:
+        //   'https://polygon.miracleplay.gg/static/media/miracle-wallet-logo.fc4f85e929ed4f42ffba971f031e0c0b.svg',
         welcomeScreen: {
           title: 'welcom title',
           subtitle: 'welcome sub title',
@@ -107,7 +109,6 @@ const DetailButton = styled.button<AccountStateType>`
   padding: 0 1rem;
 
   border: 1px solid ${defaultPalette.default};
-  border-radius: var(--border-radius);
 
   .detail-image-wrap {
     display: contents;

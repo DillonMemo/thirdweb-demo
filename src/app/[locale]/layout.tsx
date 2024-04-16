@@ -23,9 +23,18 @@ export default function RootLayout({
   children: React.ReactNode
   params: { locale: LocaleType }
 }>) {
+  const initTheme = () => {
+    localStorage.theme === 'dark' ||
+    (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)
+      ? document.documentElement.classList.add('dark')
+      : document.documentElement.classList.remove('dark')
+  }
   return (
     <html lang={locale} className={`${myFont.variable}`}>
-      <body>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: `(${initTheme})();` }} />
+      </head>
+      <body className="bg-white dark:bg-[#0d1426]">
         <RootProvider locale={locale}>
           <Navigation />
 
