@@ -2,7 +2,6 @@
 
 import 'react-toastify/dist/ReactToastify.css'
 import { Bounce, ToastContainer } from 'react-toastify'
-import { useCallback, useEffect } from 'react'
 import CustomConnectWallet from '../CustomConnectWallet.component'
 import Image from 'next/image'
 import Language from '../../../public/svgs/Language'
@@ -11,10 +10,11 @@ import { LocaleType } from '@/i18n'
 // import Logo from '../../../public/images/logo.png'
 import { Navigate } from './styles'
 import NavigationButton from '../NavigationButton.component'
+import ThemeToggle from './ThemeToggle.component'
 import { createThirdwebClient } from 'thirdweb'
+import { useCallback } from 'react'
 import { useLocale } from 'next-intl'
 import useSetAccount from '@/hooks/useSetAccount'
-import ThemeToggle from './ThemeToggle.component'
 
 const temp = {
   page1: 'TEST1',
