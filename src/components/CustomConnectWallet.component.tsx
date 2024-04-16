@@ -65,7 +65,7 @@ export default function CustomConnectWallet({
       detailsButton={{
         ...detailsButton,
         render: () => (
-          <DetailButton className={`${detailsButton?.className}`}>
+          <DetailButton className={`${detailsButton?.className} rounded-xl`}>
             <div className="detail-image-wrap">
               <UserProfile />
             </div>
@@ -109,7 +109,6 @@ const DetailButton = styled.button<AccountStateType>`
   padding: 0 1rem;
 
   border: 1px solid ${defaultPalette.default};
-  border-radius: var(--border-radius);
 
   .detail-image-wrap {
     display: contents;

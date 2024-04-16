@@ -3,21 +3,21 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-color: #ffffff;
-  --background-second-color: #f7f7f7;
+  --header-static-height: 5rem;
+  --primary-color: #80bad6;
+
+  /* --foreground-rgb: 0, 0, 0;
+  --background-color: #0d1426;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
 
-  --header-static-height: 5rem;
   --primary-color: #80bad6;
   --text-color: #a9a9a9;
   --text-light-color: rgb(210, 210, 210);
   --white-opacity-95-bg: rgba(255, 255, 255, 0.05);
 
   --border-radius: 0.75rem;
-
-  /* --primary-glow: conic-gradient(
+  --primary-glow: conic-gradient(
     from 180deg at 50% 50%,
     #16abff33 0deg,
     #0885ff33 55deg,
@@ -40,35 +40,15 @@
   ); */
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
     --background-color: #0d1426;
-    --background-second-color:#191f31;
+    --background-second-color: #191f31;
     --background-start-rgb: 0, 0, 0;
     --background-end-rgb: 0, 0, 0;
-
-    /* --primary-glow: radial-gradient(rgba(1, 65, 255, 0.4), rgba(1, 65, 255, 0));
-    --secondary-glow: linear-gradient(
-      to bottom right,
-      rgba(1, 65, 255, 0),
-      rgba(1, 65, 255, 0),
-      rgba(1, 65, 255, 0.3)
-    );
-
-    --tile-start-rgb: 2, 13, 46;
-    --tile-end-rgb: 2, 5, 19;
-    --tile-border: conic-gradient(
-      #ffffff80,
-      #ffffff40,
-      #ffffff30,
-      #ffffff20,
-      #ffffff10,
-      #ffffff10,
-      #ffffff80
-    ); */
   }
-}
+} */
 
 * {
   box-sizing: border-box;
@@ -82,14 +62,17 @@ body {
   overflow-x: hidden;
   font-family: var(--font-pretendard-std);
 }
+html {
+  .nav-pc-profile.dark\:custom:is(.dark *) {
+    background: linear-gradient(105deg, transparent 5%, #191f31 0%) !important;
+  }
+
+  .nav-mobile-profile .nav-mobile-header .close.dark\:custom:is(.dark *) {
+    background: linear-gradient(105deg, transparent 25%, #191f31 0%) !important;
+  }
+}
 body[data-scroll-locked] {
   margin-right: 0 !important;
-}
-
-body {
-  color: rgb(var(--foreground-rgb));
-
-  background: var(--background-color);
 }
 
 ul {

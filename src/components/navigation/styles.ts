@@ -139,7 +139,7 @@ export const Navigate = styled.header`
       gap: 1.5rem;
 
       height: 100%;
-      background: linear-gradient(105deg, transparent 5%, var(--background-second-color) 0%);
+      background: linear-gradient(105deg, transparent 5%, #f7f7f7 0%);
 
       padding-right: 3rem;
 
@@ -168,7 +168,6 @@ export const Navigate = styled.header`
         flex-flow: column nowrap;
         align-items: initial;
 
-        background-color: var(--background-color);
         backdrop-filter: blur(16px);
         -webkit-backdrop-filter: blur(16px);
         width: 80%;
@@ -209,11 +208,7 @@ export const Navigate = styled.header`
               flex-basis: 5rem;
 
               height: 100%;
-              background: linear-gradient(
-                105deg,
-                transparent 25%,
-                var(--background-second-color) 0%
-              );
+              background: linear-gradient(105deg, transparent 25%, #f7f7f7 0%);
             }
           }
 
