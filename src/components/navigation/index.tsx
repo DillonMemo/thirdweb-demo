@@ -58,6 +58,7 @@ export default function Navigation() {
   }, [])
 
   useEffect(() => {
+    /** {@link https://flowbite.com/docs/customize/dark-mode/} */
     const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon')
     const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon')
 
