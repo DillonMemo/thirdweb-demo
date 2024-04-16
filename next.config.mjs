@@ -8,6 +8,13 @@ const nextConfig = {
   compiler: {
     styledComponents: true,
   },
+  images: {
+    remotePatterns: [
+      {
+        hostname: 'marineinsurer.co.uk',
+      }
+    ]
+  }
 }
 
 export default withNextIntl(nextConfig)

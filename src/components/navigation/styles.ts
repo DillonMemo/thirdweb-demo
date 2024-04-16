@@ -20,7 +20,7 @@ export const Navigate = styled.header`
   width: 100%;
   top: 0;
   left: 0;
-  background-color: ${headerBackgroundColor};
+  /* background-color: ${headerBackgroundColor}; */
 
   height: var(--header-static-height);
 
@@ -91,7 +91,6 @@ export const Navigate = styled.header`
     .nav-toggle {
       display: none;
       font-size: 1.5rem;
-      color: hsl(0, 0%, 95%);
       cursor: pointer;
 
       &.hamburger {
@@ -101,7 +100,6 @@ export const Navigate = styled.header`
         .bar {
           display: block;
           margin: auto;
-          background-color: white;
           width: 100%;
           height: 3px;
           border-radius: 0.3125rem;
@@ -141,7 +139,7 @@ export const Navigate = styled.header`
       gap: 1.5rem;
 
       height: 100%;
-      background: linear-gradient(105deg, transparent 5%, #191f31 0%);
+      background: linear-gradient(105deg, transparent 5%, #f7f7f7 0%);
 
       padding-right: 3rem;
 
@@ -170,7 +168,6 @@ export const Navigate = styled.header`
         flex-flow: column nowrap;
         align-items: initial;
 
-        background-color: #0d1426;
         backdrop-filter: blur(16px);
         -webkit-backdrop-filter: blur(16px);
         width: 80%;
@@ -201,13 +198,17 @@ export const Navigate = styled.header`
             height: var(--header-static-height);
             max-height: var(--header-static-height);
 
-            background-color: ${headerBackgroundColor};
+            box-shadow:
+              0 0 #0000,
+              0 0 #0000,
+              0 1px 3px 0 rgb(0 0 0 / 0.1),
+              0 1px 2px -1px rgb(0 0 0 / 0.1);
 
             .close {
               flex-basis: 5rem;
 
               height: 100%;
-              background: linear-gradient(105deg, transparent 25%, #191f31 0%);
+              background: linear-gradient(105deg, transparent 25%, #f7f7f7 0%);
             }
           }
 

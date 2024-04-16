@@ -7,14 +7,24 @@ import Image from 'next/image'
 import Language from '../../../public/svgs/Language'
 import Link from 'next/link'
 import { LocaleType } from '@/i18n'
-import Logo from '../../../public/images/logo.png'
+// import Logo from '../../../public/images/logo.png'
 import { Navigate } from './styles'
 import NavigationButton from '../NavigationButton.component'
+import ThemeToggle from './ThemeToggle.component'
 import { createThirdwebClient } from 'thirdweb'
 import { useCallback } from 'react'
 import { useLocale } from 'next-intl'
 import useSetAccount from '@/hooks/useSetAccount'
 
+const temp = {
+  page1: 'TEST1',
+  page2: 'TEST2',
+  page3: 'TEST3',
+  page4: 'TEST4',
+  page5: 'TEST5',
+  page6: 'TEST6',
+  page7: 'TEST7',
+}
 export default function Navigation() {
   const locale = useLocale() as LocaleType
   const client = createThirdwebClient({
@@ -49,19 +59,35 @@ export default function Navigation() {
       <nav className="nav">
         <div className="nav-logo">
           <Link href={'/'} locale={locale} className="logo">
-            <Image src={Logo} alt="logo-image" width={150} />
+            {/** @example */}
+            <Image
+              src="https://marineinsurer.co.uk/wp-content/uploads/2020/05/logo-dummy.png"
+              alt="logo-image"
+              width={150}
+              height={80}
+              style={{ background: 'white' }}
+            />
+            {/* <Image src={Logo} alt="logo-image" width={150} /> */}
           </Link>
         </div>
 
-        <div className="nav-menu">
+        <div className="nav-menu md:bg-white dark:md:bg-[#0d1426]">
           <div className="nav-mobile-profile">
             <div className="nav-mobile-header">
               <div className="nav-logo">
                 <Link href={'/'} locale={locale} className="logo" onClick={onLogoClick}>
-                  <Image src={Logo} alt="logo-image" width={150} />
+                  {/** @example */}
+                  <Image
+                    src="https://marineinsurer.co.uk/wp-content/uploads/2020/05/logo-dummy.png"
+                    alt="logo-image"
+                    width={150}
+                    height={80}
+                    style={{ background: 'white' }}
+                  />
+                  {/* <Image src={Logo} alt="logo-image" width={150} /> */}
                 </Link>
               </div>
-              <div className="close"></div>
+              <div className="close dark:custom"></div>
             </div>
             <div className="nav-mobile-account">
               <CustomConnectWallet
@@ -75,66 +101,76 @@ export default function Navigation() {
           <ul className="nav-list">
             <li className="nav-item">
               <Link href="/sub" className="nav-link">
-                <NavigationButton fontWeight={300} color="var(--text-color)">
-                  Home
+                <NavigationButton>
+                  {/* Home */}
+                  {temp.page1}
                 </NavigationButton>
               </Link>
             </li>
             <li className="nav-item">
               <Link href="/sub" className="nav-link">
-                <NavigationButton fontWeight={300} color="var(--text-color)">
-                  Matches
+                <NavigationButton>
+                  {/* Matches */}
+                  {temp.page2}
                 </NavigationButton>
               </Link>
             </li>
             <li className="nav-item">
               <Link href="/sub" className="nav-link">
-                <NavigationButton fontWeight={300} color="var(--text-color)">
-                  Tournaments
+                <NavigationButton>
+                  {/* Tournaments */}
+                  {temp.page3}
                 </NavigationButton>
               </Link>
             </li>
             <li className="nav-item">
               <Link href="/sub" className="nav-link">
-                <NavigationButton fontWeight={300} color="var(--text-color)">
-                  Teams
+                <NavigationButton>
+                  {/* Teams */}
+                  {temp.page4}
                 </NavigationButton>
               </Link>
             </li>
             <li className="nav-item">
               <Link href="/sub" className="nav-link">
-                <NavigationButton fontWeight={300} color="var(--text-color)">
-                  Watchlist
+                <NavigationButton>
+                  {/* Watchlist */}
+                  {temp.page5}
                 </NavigationButton>
               </Link>
             </li>
             <li className="nav-item">
               <Link href="/sub" className="nav-link">
-                <NavigationButton fontWeight={300} color="var(--text-color)">
-                  Leaderboards
+                <NavigationButton>
+                  {/* Leaderboards */}
+                  {temp.page6}
                 </NavigationButton>
               </Link>
             </li>
             <li className="nav-item">
               <Link href="/sub" className="nav-link">
-                <NavigationButton fontWeight={300} color="var(--text-color)">
-                  Rewards
+                <NavigationButton>
+                  {/* Rewards */}
+                  {temp.page7}
                 </NavigationButton>
               </Link>
             </li>
           </ul>
           <div className="nav-mobile-services">
-            <div className="translate-mobile-wrap">
+            <div className="translate-mobile-wrap text-gray-900 dark:text-white">
               <Language width="1.5rem" height="1.5rem" />
               <span>{locale === 'ja' ? '日本語' : 'English'}</span>
             </div>
           </div>
         </div>
 
-        <div className="nav-pc-profile">
-          <div className="translate-pc-wrap">
+        <div className="nav-pc-profile dark:custom">
+          <div className="translate-pc-wrap text-gray-900 dark:text-white">
             <Language width="1.25rem" height="1.25rem" />
             <span>{locale === 'ja' ? '日本語' : 'English'}</span>
+          </div>
+          <div>
+            <ThemeToggle />
           </div>
           <div className="profile-wrap">
             <CustomConnectWallet
@@ -146,9 +182,9 @@ export default function Navigation() {
           </div>
         </div>
         <div className="nav-toggle hamburger" onClick={onToggle}>
-          <div className="bar"></div>
-          <div className="bar"></div>
-          <div className="bar"></div>
+          <div className="bar bg-gray-900 dark:bg-white"></div>
+          <div className="bar bg-gray-900 dark:bg-white"></div>
+          <div className="bar bg-gray-900 dark:bg-white"></div>
         </div>
       </nav>
       <ToastContainer
