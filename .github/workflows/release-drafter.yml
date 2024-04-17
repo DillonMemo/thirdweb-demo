@@ -34,17 +34,19 @@ jobs:
         run: |
           echo "Release HTML URL: ${{ steps.release_drafter.outputs.html_url  }}"
           echo "Release ID: ${{ steps.release_drafter.outputs.id  }}"
+          echo "Release TAG NAME: ${{ steps.release_drafter.outputs.tag_name }}"
+          echo "Release BODY: ${{ steps.release_drafter.outputs.body }}"
 
-      - name: send custom message with args
-        uses: appleboy/telegram-action@master
-        with:
-          to: ${{ secrets.TELEGRAM_CHAT_ID }}
-          token: ${{ secrets.TELEGRAM_TOKEN }}
-          format: markdown
-          message: |
-            *Update release draft*
-            📖 Repository: ${{ github.repository }}
+      # - name: send custom message with args
+      #   uses: appleboy/telegram-action@master
+      #   with:
+      #     to: ${{ secrets.TELEGRAM_CHAT_ID }}
+      #     token: ${{ secrets.TELEGRAM_TOKEN }}
+      #     format: markdown
+      #     message: |
+      #       *Update release draft*
+      #       📖 Repository: ${{ github.repository }}
 
-            👉 Release Note URL: [${{ steps.release_drafter.outputs.name }}](${{ steps.release_drafter.outputs.html_url }})
-            👉 Demo site URL: [Visit our website](https://thirdweb-demo-puce.vercel.app)
-          # args: Push 테스트중
+      #       👉 Release Note URL: [${{ steps.release_drafter.outputs.name }}](${{ steps.release_drafter.outputs.html_url }})
+      #       👉 Demo site URL: [Visit our website](https://thirdweb-demo-puce.vercel.app)
+      # args: Push 테스트중
