@@ -48,7 +48,7 @@ jobs:
             📖 Repository: ${{ github.repository }}
             👉 Demo site URL: [Visit our website](https://thirdweb-demo-puce.vercel.app)
 
-            👇 Release Note
+            *👇 Release Note (${{ steps.release_drafter.outputs.name }})*
             ---
             ${{ steps.release_drafter.outputs.body }}
           # args: Push 테스트중

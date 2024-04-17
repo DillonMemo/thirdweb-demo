@@ -3,7 +3,6 @@
 import { lg, md } from '@/styles'
 import styled, { css } from 'styled-components'
 
-const headerBackgroundColor = '#0a0f1e'
 const translateCss = css`
   user-select: none;
   display: inline-flex;
@@ -20,15 +19,16 @@ export const Navigate = styled.header`
   width: 100%;
   top: 0;
   left: 0;
-  /* background-color: ${headerBackgroundColor}; */
 
   height: var(--header-static-height);
 
-  box-shadow:
-    0 0 #0000,
-    0 0 #0000,
-    0 1px 3px 0 rgb(0 0 0 / 0.1),
-    0 1px 2px -1px rgb(0 0 0 / 0.1);
+  &.custom-box-shadow {
+    box-shadow:
+      0 0 #0000,
+      0 0 #0000,
+      0 1px 3px 0 rgb(0 0 0 / 0.1),
+      0 1px 2px -1px rgb(0 0 0 / 0.1);
+  }
 
   z-index: 100;
   .nav {
@@ -173,7 +173,10 @@ export const Navigate = styled.header`
         width: 80%;
         height: 100%;
         padding: 0;
-        border-right: 1px solid #333b45;
+
+        border-right-width: 1px;
+        border-right-style: solid;
+
         transition: left 0.4s;
 
         position: fixed;
@@ -216,8 +219,13 @@ export const Navigate = styled.header`
             display: flex;
             justify-content: center;
 
-            padding: 1rem;
-            border-bottom: 1px solid #333b45;
+            border-bottom-width: 1px;
+            border-bottom-style: solid;
+
+            > div:not(:first-of-type) {
+              border-left-width: 1px;
+              border-left-style: solid;
+            }
           }
         }
 

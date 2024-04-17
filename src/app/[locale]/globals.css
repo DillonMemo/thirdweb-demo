@@ -70,6 +70,10 @@ html {
   .nav-mobile-profile .nav-mobile-header .close.dark\:custom:is(.dark *) {
     background: linear-gradient(105deg, transparent 25%, #191f31 0%) !important;
   }
+
+  header.dark\:custom-box-shadow:is(.dark *) {
+    box-shadow: rgba(255, 255, 255, 0) 0px 0px, rgba(255, 255, 255, 0) 0px 0px, rgba(255, 255, 255, 0.1) 0px 1px 3px 0px, rgba(255, 255, 255, 0.1) 0px 1px 2px -1px;
+  }
 }
 body[data-scroll-locked] {
   margin-right: 0 !important;
