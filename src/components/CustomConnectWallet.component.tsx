@@ -89,7 +89,7 @@ export default function CustomConnectWallet({
         },
       }}
       onConnect={onConnect}
-      // autoConnect={{ timeout: 1000 * 60 * 10 }} // 10 minute
+      autoConnect={{ timeout: 1000 * 60 * 10 }} // 10 minute
     />
   )
 }
