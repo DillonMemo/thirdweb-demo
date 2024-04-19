@@ -7,17 +7,16 @@ export default function ThemeToggle() {
    * @description theme toggle switch
    */
   const onThemeToggle = useCallback(() => {
-    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon')
-    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon')
-    if (
-      !(themeToggleDarkIcon instanceof SVGElement) ||
-      !(themeToggleLightIcon instanceof SVGElement)
-    )
-      return
+    const themeToggleDarkIcon = document.querySelectorAll('#theme-toggle-dark-icon')
+    const themeToggleLightIcon = document.querySelectorAll('#theme-toggle-light-icon')
 
     // toggle icons inside button
-    themeToggleDarkIcon.classList.toggle('hidden')
-    themeToggleLightIcon.classList.toggle('hidden')
+    themeToggleDarkIcon.forEach(
+      (node) => node instanceof SVGElement && node.classList.toggle('hidden')
+    )
+    themeToggleLightIcon.forEach(
+      (node) => node instanceof SVGElement && node.classList.toggle('hidden')
+    )
 
     // if set via local storage previously
     if (localStorage.theme) {
@@ -42,24 +41,24 @@ export default function ThemeToggle() {
   }, [])
 
   useEffect(() => {
-    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon')
-    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon')
-    if (
-      !(themeToggleDarkIcon instanceof SVGElement) ||
-      !(themeToggleLightIcon instanceof SVGElement)
-    )
-      return
+    const themeToggleDarkIcon = document.querySelectorAll('#theme-toggle-dark-icon')
+    const themeToggleLightIcon = document.querySelectorAll('#theme-toggle-light-icon')
 
     // Change the icons inside the button based on previous settings
     if (
       localStorage.theme === 'dark' ||
       (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)
     ) {
-      themeToggleLightIcon.classList.remove('hidden')
+      themeToggleLightIcon.forEach(
+        (node) => node instanceof SVGElement && node.classList.remove('hidden')
+      )
     } else {
-      themeToggleDarkIcon.classList.remove('hidden')
+      themeToggleDarkIcon.forEach(
+        (node) => node instanceof SVGElement && node.classList.remove('hidden')
+      )
     }
   }, [])
+
   return (
     <button
       id="theme-toggle"

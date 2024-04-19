@@ -2,7 +2,7 @@
 
 export default function Sub() {
   return (
-    <main style={{ marginTop: 'var(--header-static-height)' }}>
+    <main>
       {/* eslint-disable-next-line no-console */}
       <section onClick={() => console.log('section click')}>
         <h1>Hello Test Page</h1>

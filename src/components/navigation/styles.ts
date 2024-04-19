@@ -15,10 +15,10 @@ const translateCss = css`
   }
 `
 export const Navigate = styled.header`
-  position: fixed;
+  /* position: sticky;
+  top: 0; */
+
   width: 100%;
-  top: 0;
-  left: 0;
 
   height: var(--header-static-height);
 
