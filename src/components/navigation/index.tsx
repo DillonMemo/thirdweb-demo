@@ -55,7 +55,7 @@ export default function Navigation() {
   }, [])
 
   return (
-    <Navigate className="custom-box-shadow dark:custom-box-shadow">
+    <Navigate className="custom-box-shadow dark:custom-box-shadow bg-[#ffffff] dark:bg-[#0d1426]">
       <nav className="nav">
         <div className="nav-logo">
           <Link href={'/'} locale={locale} className="logo">
