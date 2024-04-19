@@ -55,7 +55,7 @@ export default function Navigation() {
   }, [])
 
   return (
-    <Navigate>
+    <Navigate className="custom-box-shadow dark:custom-box-shadow bg-[#ffffff] dark:bg-[#0d1426]">
       <nav className="nav">
         <div className="nav-logo">
           <Link href={'/'} locale={locale} className="logo">
@@ -71,7 +71,7 @@ export default function Navigation() {
           </Link>
         </div>
 
-        <div className="nav-menu md:bg-white dark:md:bg-[#0d1426]">
+        <div className="nav-menu md:bg-white dark:md:border-r-[#333b45] dark:md:bg-[#0d1426]">
           <div className="nav-mobile-profile">
             <div className="nav-mobile-header">
               <div className="nav-logo">
@@ -89,13 +89,18 @@ export default function Navigation() {
               </div>
               <div className="close dark:custom"></div>
             </div>
-            <div className="nav-mobile-account">
-              <CustomConnectWallet
-                client={client}
-                locale={locale}
-                connectButton={{ className: 'connect-wallet-button' }}
-                detailsButton={{ className: 'detail-wallet-button' }}
-              />
+            <div className="nav-mobile-account dark:md:border-b-[#333b45]">
+              <div className="flex flex-1 items-center justify-center py-4">
+                <CustomConnectWallet
+                  client={client}
+                  locale={locale}
+                  connectButton={{ className: 'connect-wallet-button' }}
+                  detailsButton={{ className: 'detail-wallet-button' }}
+                />
+              </div>
+              <div className="flex items-center px-3 dark:md:border-l-[#333b45]">
+                <ThemeToggle />
+              </div>
             </div>
           </div>
           <ul className="nav-list">
