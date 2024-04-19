@@ -38,7 +38,7 @@ export default function RootLayout({
         <RootProvider locale={locale}>
           <Navigation />
 
-          <main className="main">{children}</main>
+          <main className="main md:px-4">{children}</main>
         </RootProvider>
       </body>
     </html>
