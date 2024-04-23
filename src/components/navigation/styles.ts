@@ -116,6 +116,7 @@ export const Navigate = styled.header`
         }
 
         &.is-opened {
+          z-index: 100;
           .bar {
             &:first-child {
               transform: translateY(10px) rotate(45deg);
@@ -186,6 +187,7 @@ export const Navigate = styled.header`
         }
         &.show-menu {
           left: 0;
+          z-index: 100;
         }
 
         .nav-mobile-profile {
