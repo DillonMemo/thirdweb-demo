@@ -1,30 +1,58 @@
 'use client'
 
+import { addDoc, collection, onSnapshot, orderBy, query } from 'firebase/firestore'
+import { useCallback, useEffect } from 'react'
+import { useRecoilState, useRecoilValue } from 'recoil'
+import { ChatStateType } from '@/recoil/chat/type'
+import { accountState } from '@/recoil/account'
 import { chatState } from '@/recoil/chat'
-import { useRecoilState } from 'recoil'
-// import { useTranslations } from 'next-intl'
+import dayjs from 'dayjs'
+import { db } from '@/config/firebase'
 
 export default function Slider() {
   const [chats, setChats] = useRecoilState(chatState)
-  // const translate = useTranslations()
+  const account = useRecoilValue(accountState)
 
-  // const snap = onSnapshot(
-  //   collection(db, 'chats'),
-  //   { includeMetadataChanges: true },
-  //   (querySnapshot) => {
-  //     const list: ChatStateType[] = []
-  //     querySnapshot.docChanges().forEach(function (change) {
-  //       let data = change.doc.data() as ChatStateType
-  //       data = { ...data, id: change.doc.id }
-  //       list.push(data)
-  //     })
-  //     setChats(list)
-  //   }
-  // )
+  const onKeydownAddChat = useCallback(
+    async (e: React.KeyboardEvent<HTMLInputElement>) => {
+      try {
+        const { keyCode, key, target } = e
+        if (keyCode === 13 && key === 'Enter' && target instanceof HTMLInputElement) {
+          const value = target.value
+          target.value = ''
+          await addDoc(collection(db, 'chats'), {
+            nickname: (account.nickname || '***').trim(),
+            message: value,
+            timestamp: dayjs().toDate(),
+          })
+        }
+      } catch (error) {
+        console.error(error)
+      } finally {
+        const container = document.querySelector('.chat-container')
+        container instanceof HTMLDivElement && (container.scrollTop = container.scrollHeight)
+      }
+    },
+    [account]
+  )
+  useEffect(() => {
+    const collectionRef = query(collection(db, 'chats'), orderBy('timestamp', 'asc'))
+    const unsubscribe = onSnapshot(
+      collectionRef,
+      { includeMetadataChanges: true },
+      (querySnapshot) => {
+        const itemsArr: ChatStateType[] = []
+        querySnapshot.forEach((doc) => {
+          itemsArr.push({ ...(doc.data() as ChatStateType), id: doc.id })
+        })
 
-  // console.warn('lang', translate('test'))
-  // const result = useChatSnapshot()
-  console.log('✅', chats)
+        setChats(itemsArr)
+      }
+    )
+
+    return () => unsubscribe()
+  }, [])
+
   return (
     <div className="grid grid-cols-[20rem_minmax(20rem,_1fr)_20rem] gap-5 md:grid-cols-1 md:gap-4">
       {/** @note Skeleton */}
@@ -41,25 +69,35 @@ export default function Slider() {
           </div>
         </div>
 
-        <div className="mt-4 flex h-96 w-full flex-col items-center rounded-lg border border-gray-200 bg-white p-6 shadow dark:border-gray-700 dark:bg-gray-800 dark:shadow-gray-500">
-          <div className="w-full  flex-1 overflow-y-auto rounded-lg rounded-b-none bg-gray-200 p-3 dark:bg-gray-700">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima eius sequi, accusantium
-            quod excepturi beatae architecto et facere voluptate repellendus ut corrupti animi fugit
-            laudantium? Ad soluta illo debitis? Obcaecati?
+        <div className="mt-4 flex h-[30rem] w-full flex-col items-center gap-2 rounded-lg border border-gray-200 bg-white p-4 shadow dark:border-gray-700 dark:bg-gray-800 dark:shadow-gray-500">
+          <div className="chat-container flex w-full flex-1 flex-col flex-nowrap gap-3 overflow-y-auto rounded-lg rounded-b-none">
+            {chats.map((chat, index) => (
+              <div
+                key={`chat-${index}`}
+                className="flex w-full flex-col rounded-e-xl rounded-es-xl border-gray-200 bg-gray-100 p-2 dark:bg-gray-700">
+                <div className="flex items-center space-x-2 rtl:space-x-reverse">
+                  <span className="text-sm font-semibold text-gray-900 dark:text-white">
+                    {chat.nickname.slice(0, chat.nickname.length / 2) + '***'}
+                  </span>
+                  <span className="text-sm font-normal text-gray-500 dark:text-gray-400">
+                    {chat.timestamp && dayjs(chat.timestamp.toMillis()).format('hh:mm A')}
+                  </span>
+                </div>
+                <p className="pb-1 pt-2 text-sm font-normal text-gray-900 dark:text-white">
+                  {chat.message}
+                </p>
+              </div>
+            ))}
           </div>
-          <form
-            action=""
-            method=""
-            className="rounded-lg rounded-t-none bg-gray-200 px-3 py-2 dark:bg-gray-700">
-            <label htmlFor="chat" className="sr-only">
-              Your Message
-            </label>
+          <div className="w-full rounded-lg rounded-t-none bg-gray-200 px-3 py-2 dark:bg-gray-700">
             <div className="flex items-center ">
-              <textarea
+              <input
+                type="text"
                 id="chat"
-                cols={30}
-                rows={1}
-                className="mr-4 block w-full resize-none rounded-lg border border-gray-300 bg-white p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-800 dark:text-white dark:placeholder-gray-400"></textarea>
+                placeholder="Your Message"
+                className="mr-4 block w-full resize-none rounded-lg border border-gray-300 bg-white p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-800 dark:text-white dark:placeholder-gray-400"
+                onKeyDown={onKeydownAddChat}
+              />
               <button
                 type="submit"
                 className="inline-flex cursor-pointer justify-center rounded-full p-2 text-blue-600 hover:bg-blue-100 dark:text-blue-500 dark:hover:bg-gray-600">
@@ -74,7 +112,7 @@ export default function Slider() {
                 <span className="sr-only">Send message</span>
               </button>
             </div>
-          </form>
+          </div>
         </div>
       </aside>
 
