@@ -2,7 +2,6 @@
 
 import { ConnectButton, ConnectButtonProps } from 'thirdweb/react'
 import { Wallet, embeddedWallet } from 'thirdweb/wallets'
-import { AccountStateType } from '@/recoil/account/type'
 import { LocaleType } from '@/i18n'
 import { ThirdwebClient } from 'thirdweb'
 import UserProfile from '../../public/svgs/UserProfile'
@@ -25,6 +24,7 @@ export default function CustomConnectWallet({
   locale,
 }: Props) {
   const [account, setAccount] = useRecoilState(accountState)
+
   const onConnect = useCallback(async (wallet: Wallet) => {
     try {
       const email = await getUserEmail({ client })
@@ -33,6 +33,7 @@ export default function CustomConnectWallet({
         ...(email && { email, nickname: email.split('@')[0] }),
         wallet,
       }))
+
       toast.success('Successed connect to wallet')
     } catch (error) {
       toast.error('Failed connect to wallet')
@@ -61,7 +62,7 @@ export default function CustomConnectWallet({
       recommendedWallets={[embeddedWallet({ auth: { options: ['email', 'google'] } })]}
       showAllWallets={false}
       locale={locale === 'ja' ? 'ja_JP' : 'en_US'}
-      connectButton={{ ...connectButton, label: 'Login' }}
+      connectButton={{ ...connectButton, label: 'Sign in' }}
       detailsButton={{
         ...detailsButton,
         render: () => (
@@ -94,7 +95,7 @@ export default function CustomConnectWallet({
   )
 }
 
-const DetailButton = styled.button<AccountStateType>`
+const DetailButton = styled.button`
   outline: none;
   border: none;
   background-color: transparent;
