@@ -89,6 +89,7 @@ body[data-scroll-locked] {
 main {
   margin: 0 auto;
   padding-top: 4rem;
+  padding-bottom: 1rem;
   max-width: var(--main-max-width);
 }
 ul {
@@ -112,6 +113,13 @@ a {
 }
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(34, 45, 50, 1);
+}
+.scrollbar-hidden {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none;
 }
 
 @media (prefers-color-scheme: dark) {
