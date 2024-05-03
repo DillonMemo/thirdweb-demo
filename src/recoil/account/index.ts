@@ -2,7 +2,7 @@ import { AccountStateType } from './type'
 import { atom } from 'recoil'
 
 export const accountState = atom<AccountStateType>({
-  key: 'accountState',
+  key: 'account',
   default: {
     connectionStatus: 'disconnected',
     email: undefined,
