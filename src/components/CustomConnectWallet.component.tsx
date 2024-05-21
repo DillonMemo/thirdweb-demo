@@ -1,13 +1,14 @@
 'use client'
 
 import { ConnectButton, ConnectButtonProps } from 'thirdweb/react'
-import { Wallet, embeddedWallet } from 'thirdweb/wallets'
+import { Wallet, inAppWallet } from 'thirdweb/wallets'
 import { LocaleType } from '@/i18n'
 import { ThirdwebClient } from 'thirdweb'
 import UserProfile from '../../public/svgs/UserProfile'
 import { accountState } from '@/recoil/account'
 import { defaultPalette } from '@/styles'
 import { getUserEmail } from 'thirdweb/wallets/embedded'
+import { polygon } from 'thirdweb/chains'
 import styled from 'styled-components'
 import { toast } from 'react-toastify'
 import { useCallback } from 'react'
@@ -58,8 +59,9 @@ export default function CustomConnectWallet({
   return (
     <ConnectButton
       client={client}
-      wallets={[embeddedWallet({ auth: { options: ['email', 'google'] } })]}
-      recommendedWallets={[embeddedWallet({ auth: { options: ['email', 'google'] } })]}
+      chain={polygon}
+      wallets={[inAppWallet({ auth: { options: ['email', 'google'] } })]}
+      recommendedWallets={[inAppWallet({ auth: { options: ['email', 'google'] } })]}
       showAllWallets={false}
       locale={locale === 'ja' ? 'ja_JP' : 'en_US'}
       connectButton={{ ...connectButton, label: 'Sign in' }}
