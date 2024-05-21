@@ -1,4 +1,5 @@
 import { NextIntlClientProvider, useMessages } from 'next-intl'
+import ApolloProvider from './apollo.provider'
 import { LocaleType } from '@/i18n'
 import RecoilProvider from './recoil.provider'
 import { SpeedInsights } from '@vercel/speed-insights/next'
@@ -15,12 +16,14 @@ export default function RootProvider({
   const messages = useMessages()
   return (
     <NextIntlClientProvider locale={locale} messages={messages}>
-      <ThirdProvider>
-        <RecoilProvider>
-          <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
-        </RecoilProvider>
-      </ThirdProvider>
-      <SpeedInsights />
+      <ApolloProvider>
+        <ThirdProvider>
+          <RecoilProvider>
+            <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
+          </RecoilProvider>
+        </ThirdProvider>
+        <SpeedInsights />
+      </ApolloProvider>
     </NextIntlClientProvider>
   )
 }
