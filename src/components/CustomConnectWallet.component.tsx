@@ -60,7 +60,8 @@ export default function CustomConnectWallet({
     <ConnectButton
       client={client}
       chain={polygon}
-      wallets={[inAppWallet({ auth: { options: ['email', 'google'] } })]}
+      wallets={[
+        ({ auth: { options: ['email', 'google'] } })]}
       recommendedWallets={[inAppWallet({ auth: { options: ['email', 'google'] } })]}
       showAllWallets={false}
       locale={locale === 'ja' ? 'ja_JP' : 'en_US'}
