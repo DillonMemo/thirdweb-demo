@@ -27,10 +27,10 @@ const temp = {
 }
 export default function Navigation() {
   const locale = useLocale() as LocaleType
-  const client = createThirdwebClient({
-    clientId: process.env.NEXT_PUBLIC_TEMPLATE_CLIENT_ID || '',
-  })
 
+  const client = createThirdwebClient({
+    clientId: process.env.NEXT_PUBLIC_THIRDWEB_CLIENT_ID || '',
+  })
   useSetAccount({ client })
 
   const onToggle = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
@@ -71,7 +71,7 @@ export default function Navigation() {
           </Link>
         </div>
 
-        <div className="nav-menu md:bg-white dark:md:border-r-[#333b45] dark:md:bg-[#0d1426]">
+        <div className="nav-menu md:bg-white dark:md:border-r-[#333b45] dark:md:bg-[#0d1426] lg:pr-0">
           <div className="nav-mobile-profile">
             <div className="nav-mobile-header">
               <div className="nav-logo">
@@ -164,7 +164,7 @@ export default function Navigation() {
           <div className="nav-mobile-services">
             <div className="translate-mobile-wrap text-gray-900 dark:text-white">
               <Language width="1.5rem" height="1.5rem" />
-              <span>{locale === 'ja' ? '日本語' : 'English'}</span>
+              <span>English</span>
             </div>
           </div>
         </div>
@@ -172,7 +172,7 @@ export default function Navigation() {
         <div className="nav-pc-profile dark:custom">
           <div className="translate-pc-wrap text-gray-900 dark:text-white">
             <Language width="1.25rem" height="1.25rem" />
-            <span>{locale === 'ja' ? '日本語' : 'English'}</span>
+            <span>English</span>
           </div>
           <div>
             <ThemeToggle />

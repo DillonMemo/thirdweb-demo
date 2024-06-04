@@ -36,7 +36,7 @@
     "no-console": [
       2,
       {
-        "allow": ["warn", "error"]
+        "allow": ["warn", "error", "table"]
       }
     ],
     "no-useless-escape": "off",

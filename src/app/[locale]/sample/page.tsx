@@ -23,8 +23,11 @@ export default function Test() {
 
   return (
     <main>
-      <section>
-        <h1>Graphql 테스트 페이지 입니다</h1>
+      <section className="text-black dark:text-white">
+        <h1>Graphql Connection Sample</h1>
+        <p>
+          Series Formats 👉 <small>The format of the series, such as: BO1, BO3, SA2.</small>
+        </p>
 
         {loading ? (
           <div role="status" className="mt-4">

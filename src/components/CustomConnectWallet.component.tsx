@@ -6,9 +6,11 @@ import { LocaleType } from '@/i18n'
 import { ThirdwebClient } from 'thirdweb'
 import UserProfile from '../../public/svgs/UserProfile'
 import { accountState } from '@/recoil/account'
+import { base } from 'thirdweb/chains'
+// import { createHmac } from 'crypto'
+import { debounce } from 'lodash'
 import { defaultPalette } from '@/styles'
 import { getUserEmail } from 'thirdweb/wallets/embedded'
-import { polygon } from 'thirdweb/chains'
 import styled from 'styled-components'
 import { toast } from 'react-toastify'
 import { useCallback } from 'react'
@@ -26,21 +28,34 @@ export default function CustomConnectWallet({
 }: Props) {
   const [account, setAccount] = useRecoilState(accountState)
 
-  const onConnect = useCallback(async (wallet: Wallet) => {
-    try {
-      const email = await getUserEmail({ client })
-      setAccount((prev) => ({
-        ...prev,
-        ...(email && { email, nickname: email.split('@')[0] }),
-        wallet,
-      }))
+  const onConnect = useCallback(
+    debounce(async (wallet: Wallet) => {
+      try {
+        const address = wallet.getAccount()?.address
 
-      toast.success('Successed connect to wallet')
-    } catch (error) {
-      toast.error('Failed connect to wallet')
-      console.error(error)
-    }
-  }, [])
+        if (address) {
+          const email = await getUserEmail({ client })
+
+          if (email) {
+            /** @todo hash api request */
+            // const hash = createHmac('sha256', 'sevenlinelabs_tipster').update(email).digest('hex')
+
+            setAccount((prev) => ({
+              ...prev,
+              ...(email && { email, nickname: email.split('@')[0] }),
+              wallet,
+            }))
+
+            toast.success('Successed connect to wallet')
+          } else throw new SyntaxError('not found email')
+        } else throw new SyntaxError('not found address')
+      } catch (error) {
+        toast.error('Failed connect to wallet', (error as any).message)
+        console.error(error)
+      }
+    }, 300),
+    []
+  )
 
   /**
    * @example contract
@@ -59,11 +74,12 @@ export default function CustomConnectWallet({
   return (
     <ConnectButton
       client={client}
-      chain={polygon}
+      chain={base}
       wallets={[inAppWallet({ auth: { options: ['email', 'google'] } })]}
       recommendedWallets={[inAppWallet({ auth: { options: ['email', 'google'] } })]}
       showAllWallets={false}
-      locale={locale === 'ja' ? 'ja_JP' : 'en_US'}
+      // locale={locale === 'ja' ? 'ja_JP' : 'en_US'}
+      locale={(locale + '_US') as 'en_US'}
       connectButton={{ ...connectButton, label: 'Sign in' }}
       detailsButton={{
         ...detailsButton,

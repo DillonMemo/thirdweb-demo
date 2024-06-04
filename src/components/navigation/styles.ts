@@ -1,6 +1,6 @@
 'use client'
 
-import { lg, md } from '@/styles'
+import { lg, md, xl } from '@/styles'
 import styled, { css } from 'styled-components'
 
 const translateCss = css`
@@ -60,8 +60,11 @@ export const Navigate = styled.header`
       justify-content: flex-start;
       padding: 0 2.875rem;
 
+      ${xl} {
+        padding: 0 1rem;
+      }
       ${lg} {
-        padding: 0 1.5rem;
+        padding: 0 0 0 1.5rem;
       }
 
       .nav-mobile-profile {
@@ -133,6 +136,8 @@ export const Navigate = styled.header`
     }
 
     .nav-pc-profile {
+      min-width: 30rem;
+      max-width: 30rem;
       flex-basis: 30%;
       display: flex;
       align-items: center;

@@ -1,7 +1,7 @@
 import { getClient } from '@/lib/client'
 import { gql } from '@apollo/client'
 
-const query = gql`
+const server_query = gql`
   query SeriesFormats {
     seriesFormats {
       id
@@ -14,7 +14,7 @@ export default async function TestLayout({ children }: Readonly<{ children: Reac
   const client = getClient()
 
   const { data } = await client.query({
-    query,
+    query: server_query,
   })
 
   console.warn('test', data)
