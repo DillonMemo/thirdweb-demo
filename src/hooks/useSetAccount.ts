@@ -21,37 +21,6 @@ export default function useSetAccount({ client }: HookProps) {
     }
   }, [activeWallet])
 
-  // useEffect(() => {
-
-  // if (connectionStatus === 'disconnected') {
-  // const controller = new AbortController()
-
-  // const fetch = async () => {
-  //   try {
-  //     const getEmail = async () => await getUserEmail({ client })
-  //     const email = await getEmail()
-  //     setAccount((prev) => ({
-  //       ...prev,
-  //       ...(email && { email: email, nickname: email.split('@')[0] }),
-  //     }))
-  //   } catch (error: any) {
-  //     error.name === 'AbortError'
-  //       ? console.error('Fetch aborted')
-  //       : console.error('Fetch error:', error)
-  //   }
-  // }
-
-  // fetch()
-
-  // return () => controller.abort()
-  //   console.log('effect disconnected')
-  // } else if (connectionStatus === 'connecting') {
-  //   console.log('effect connecting')
-  // } else if (connectionStatus === 'connected') {
-  //   console.log('effect connected')
-  // }
-  // }, [connectionStatus])
-
   useEffect(() => {
     if (connectionStatus === 'connected') {
       const controller = new AbortController()
