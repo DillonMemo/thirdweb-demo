@@ -58,7 +58,7 @@ export const Navigate = styled.header`
       display: flex;
       align-items: center;
       justify-content: flex-start;
-      padding: 0 2.875rem;
+      padding: 0 2.875rem 0 1.875rem;
 
       ${xl} {
         padding: 0 1rem;
@@ -72,17 +72,15 @@ export const Navigate = styled.header`
       }
       .nav-list {
         display: flex;
+        align-items: center;
         flex-direction: row;
         column-gap: 1rem;
 
-        .nav-item {
-          .nav-link {
-            color: hsl(0, 0%, 95%);
-            transition: color 0.4s;
+        height: 100%;
 
-            &:hover {
-              color: hsl(28, 88%, 62%);
-            }
+        .nav-item {
+          padding-top: 0.5rem;
+          .nav-link {
           }
         }
       }
@@ -239,6 +237,7 @@ export const Navigate = styled.header`
         .nav-list {
           flex: 3;
           flex-direction: column;
+          align-items: start;
           row-gap: 2.5rem;
 
           padding: 0 1rem;
