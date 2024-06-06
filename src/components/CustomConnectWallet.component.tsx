@@ -2,6 +2,7 @@
 
 import { ConnectButton, ConnectButtonProps } from 'thirdweb/react'
 import { Wallet, inAppWallet } from 'thirdweb/wallets'
+import { useRecoilState, useSetRecoilState } from 'recoil'
 import { LocaleType } from '@/i18n'
 import { ThirdwebClient } from 'thirdweb'
 import UserProfile from '../../public/svgs/UserProfile'
@@ -11,10 +12,10 @@ import { base } from 'thirdweb/chains'
 import { debounce } from 'lodash'
 import { defaultPalette } from '@/styles'
 import { getUserEmail } from 'thirdweb/wallets/embedded'
+import { isEditProfileModalState } from '@/recoil/modal'
 import styled from 'styled-components'
 import { toast } from 'react-toastify'
 import { useCallback } from 'react'
-import { useRecoilState } from 'recoil'
 
 interface Props extends Pick<ConnectButtonProps, 'connectButton' | 'detailsButton'> {
   locale: LocaleType
@@ -27,6 +28,7 @@ export default function CustomConnectWallet({
   locale,
 }: Props) {
   const [account, setAccount] = useRecoilState(accountState)
+  const setIsEditProfileModal = useSetRecoilState(isEditProfileModalState)
 
   const onConnect = useCallback(
     debounce(async (wallet: Wallet) => {
@@ -56,6 +58,14 @@ export default function CustomConnectWallet({
     }, 300),
     []
   )
+
+  /**
+   * @description 프로필 수정 모달 열기 클릭 이벤트 핸들러
+   */
+  const onEditProfile = (event: React.MouseEvent<HTMLDivElement>) => {
+    event.stopPropagation()
+    setIsEditProfileModal(true)
+  }
 
   /**
    * @example contract
@@ -89,8 +99,30 @@ export default function CustomConnectWallet({
               <UserProfile />
             </div>
             <div className="detail-profile-wrap">
-              <div className="detail-nickname">{account.nickname}</div>
-              <div className="detail-email">{account.email}</div>
+              <div className="detail-nickname text-black dark:text-[#a9a9a9]">
+                {account.nickname}
+              </div>
+              <div className="detail-email text-gray-700 dark:text-[#a9a9a9f7]">
+                {account.email}
+              </div>
+            </div>
+            <div
+              className="edit-profile rounded-xl p-2 text-gray-600 hover:bg-gray-300 dark:text-gray-300 dark:hover:bg-gray-600"
+              onClick={onEditProfile}>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="1rem"
+                height="1rem"
+                viewBox="0 0 24 24">
+                <path
+                  fill="none"
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="m14.304 4.844l2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565l6.844-6.844a2.015 2.015 0 0 1 2.852 0Z"
+                />
+              </svg>
             </div>
           </DetailButton>
         ),
@@ -151,12 +183,10 @@ const DetailButton = styled.button`
     flex-flow: column nowrap;
     align-items: flex-start;
     .detail-nickname {
-      color: rgba(169, 169, 169, 1);
       font-size: 0.875rem;
       line-height: 1.125rem;
     }
     .detail-email {
-      color: rgba(169, 169, 169, 0.5);
       font-size: 0.75rem;
       line-height: 1.125rem;
     }
