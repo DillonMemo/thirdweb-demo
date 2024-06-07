@@ -162,7 +162,10 @@ export default function Navigation() {
             </li>
           </ul>
           <div className="nav-mobile-services">
-            <div className="translate-mobile-wrap text-gray-900 dark:text-white">
+            {/** @todo Disabling Multilingual Display in a Multi-lingual Service */}
+            <div
+              className="translate-mobile-wrap text-gray-900 dark:text-white"
+              style={{ display: 'none' }}>
               <Language width="1.5rem" height="1.5rem" />
               <span>English</span>
             </div>
@@ -170,7 +173,10 @@ export default function Navigation() {
         </div>
 
         <div className="nav-pc-profile dark:custom">
-          <div className="translate-pc-wrap text-gray-900 dark:text-white">
+          {/** @todo Disabling Multilingual Display in a Multi-lingual Service */}
+          <div
+            className="translate-pc-wrap text-gray-900 dark:text-white"
+            style={{ display: 'none' }}>
             <Language width="1.25rem" height="1.25rem" />
             <span>English</span>
           </div>
