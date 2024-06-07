@@ -90,7 +90,7 @@ export default function Navigation() {
               <div className="close dark:custom"></div>
             </div>
             <div className="nav-mobile-account dark:md:border-b-[#333b45]">
-              <div className="flex flex-1 items-center justify-center py-4">
+              <div className="flex flex-1 items-center justify-center py-4 md:justify-start md:px-4">
                 <CustomConnectWallet
                   client={client}
                   locale={locale}
@@ -106,10 +106,7 @@ export default function Navigation() {
           <ul className="nav-list">
             <li className="nav-item">
               <Link href="/sub" className="nav-link">
-                <NavigationButton>
-                  {/* Home */}
-                  {temp.page1}
-                </NavigationButton>
+                <NavigationButton>Matches</NavigationButton>
               </Link>
             </li>
             <li className="nav-item">

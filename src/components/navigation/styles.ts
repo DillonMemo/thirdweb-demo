@@ -30,7 +30,7 @@ export const Navigate = styled.header`
       0 1px 2px -1px rgb(0 0 0 / 0.1);
   }
 
-  z-index: 100;
+  z-index: 9;
   .nav {
     display: flex;
     align-items: center;
@@ -38,7 +38,7 @@ export const Navigate = styled.header`
     position: relative;
 
     height: 100%;
-    padding: 0 0 0 3rem;
+    padding: 0 0 0 2rem;
 
     ${lg} {
       padding: 0 0 0 1rem;
@@ -117,7 +117,7 @@ export const Navigate = styled.header`
         }
 
         &.is-opened {
-          z-index: 100;
+          z-index: 9;
           .bar {
             &:first-child {
               transform: translateY(10px) rotate(45deg);
@@ -134,9 +134,9 @@ export const Navigate = styled.header`
     }
 
     .nav-pc-profile {
-      min-width: 30rem;
-      max-width: 30rem;
-      flex-basis: 30%;
+      min-width: 25rem;
+      max-width: 25rem;
+      flex-basis: 25%;
       display: flex;
       align-items: center;
       justify-content: flex-end;
@@ -145,7 +145,7 @@ export const Navigate = styled.header`
       height: 100%;
       background: linear-gradient(105deg, transparent 5%, #f7f7f7 0%);
 
-      padding-right: 3rem;
+      padding-right: 2rem;
 
       ${lg} {
         padding-right: 1rem;
@@ -190,7 +190,7 @@ export const Navigate = styled.header`
         }
         &.show-menu {
           left: 0;
-          z-index: 100;
+          z-index: 9;
         }
 
         .nav-mobile-profile {
