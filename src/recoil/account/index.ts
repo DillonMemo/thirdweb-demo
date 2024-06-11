@@ -7,6 +7,7 @@ export const accountState = atom<AccountStateType>({
     connectionStatus: 'disconnected',
     email: undefined,
     nickname: undefined,
+    profileImage: undefined,
     wallet: undefined,
   },
 })

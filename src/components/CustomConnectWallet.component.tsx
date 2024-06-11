@@ -2,11 +2,13 @@
 
 import { ConnectButton, ConnectButtonProps } from 'thirdweb/react'
 import { Wallet, inAppWallet } from 'thirdweb/wallets'
+import { useCallback, useRef, useState } from 'react'
+import EmptyProfile from '../../public/images/no-profile.png'
+import Image from 'next/image'
 import { LocaleType } from '@/i18n'
 import { Modal } from 'flowbite-react'
-import TestService from '@/service/example/example.service'
+// import TestService from '@/service/example/example.service'
 import { ThirdwebClient } from 'thirdweb'
-import UserProfile from '../../public/svgs/UserProfile'
 import { accountState } from '@/recoil/account'
 import { base } from 'thirdweb/chains'
 // import { createHmac } from 'crypto'
@@ -15,8 +17,7 @@ import { getUserEmail } from 'thirdweb/wallets/embedded'
 import { isEditProfileModalState } from '@/recoil/modal'
 import styled from 'styled-components'
 import { toast } from 'react-toastify'
-import { useCallback } from 'react'
-import { useQuery } from '@tanstack/react-query'
+// import { useQuery } from '@tanstack/react-query'
 import { useRecoilState } from 'recoil'
 
 interface Props extends Pick<ConnectButtonProps, 'connectButton' | 'detailsButton'> {
@@ -29,8 +30,11 @@ export default function CustomConnectWallet({
   detailsButton,
   locale,
 }: Props) {
+  const [isNicknameDisable, setIsNicknameDisable] = useState(true)
   const [account, setAccount] = useRecoilState(accountState)
   const [isEditProfileModal, setIsEditProfileModal] = useRecoilState(isEditProfileModalState)
+
+  const nickNameRef = useRef() as React.MutableRefObject<HTMLInputElement>
 
   /**
    * @description REST API 테스트
@@ -38,12 +42,10 @@ export default function CustomConnectWallet({
    * {@link https://soobing.github.io/react/next-app-router-react-query/ React-Query Sample}
    */
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { data, isLoading, error } = useQuery({
-    queryKey: ['photos'] as const,
-    queryFn: () => TestService.getPhotos(),
-  })
-  // eslint-disable-next-line no-console
-  console.log(data, isLoading, error)
+  // const { data, isLoading, error } = useQuery({
+  //   queryKey: ['photos'] as const,
+  //   queryFn: () => TestService.getPhotos(),
+  // })
 
   const onConnect = useCallback(
     debounce(async (wallet: Wallet) => {
@@ -83,6 +85,37 @@ export default function CustomConnectWallet({
   }
 
   /**
+   * @description 닉네임 수정 클릭 이벤트 핸들러
+   */
+  const onEditNickname = useCallback(() => {
+    if (nickNameRef.current instanceof HTMLInputElement) {
+      setIsNicknameDisable(false)
+      nickNameRef.current.focus()
+    }
+  }, [setIsNicknameDisable, nickNameRef])
+
+  /**
+   * @description cancle nickname button click handler
+   */
+  const onClickCancel = useCallback(() => {
+    if (nickNameRef.current instanceof HTMLInputElement) {
+      setIsNicknameDisable(true)
+      nickNameRef.current.value = account.nickname || ''
+    }
+  }, [account.nickname, nickNameRef])
+
+  /**
+   * @description save nickname button click handler
+   */
+  const onClickSave = useCallback(async () => {
+    try {
+      setIsNicknameDisable(true)
+    } catch (error) {
+      console.error('nickname save failed')
+    }
+  }, [nickNameRef])
+
+  /**
    * @example contract
    */
   // setTimeout(async () => {
@@ -118,7 +151,12 @@ export default function CustomConnectWallet({
                   className="detail-image-wrap bg-slate-300 dark:bg-gray-600"
                   data-modal-target="crud-modal"
                   data-modal-toggle="crud-modal">
-                  <UserProfile />
+                  <Image
+                    src={account.profileImage || EmptyProfile}
+                    alt="empty-profile-image"
+                    width={40}
+                    height={40}
+                  />
                   <div
                     className="edit-profile-overlay bg-gray-300 text-gray-600 dark:bg-gray-600 dark:text-gray-300"
                     onClick={onEditProfile}>
@@ -165,19 +203,84 @@ export default function CustomConnectWallet({
         onConnect={onConnect}
         autoConnect={{ timeout: 1000 * 60 * 10 }} // 10 minute
       />
+
       <Modal
-        dismissible
         show={isEditProfileModal}
         position="center"
         theme={{
+          root: {
+            base: 'backdrop-blur-md z-50',
+          },
           content: { base: 'h-auto w-full' },
         }}
         onClose={() => setIsEditProfileModal(false)}>
         <Modal.Header>Edit Profile</Modal.Header>
         <Modal.Body className="">
-          <div className="space-y-6">
-            <p>Hello Edit Profile</p>
-          </div>
+          <ModalContainer className="space-y-6">
+            <div className="avatar-upload">
+              <div className="avatar-edit">
+                <input type="file" id="imageUpload" accept=".png, .jpg, .jpeg" />
+                <label
+                  htmlFor="imageUpload"
+                  className="bg-gray-600 hover:border-gray-600 hover:bg-[var(--light-primary-color)] dark:bg-gray-200 dark:hover:border-gray-200 dark:hover:bg-[var(--primary-color)]">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="1rem"
+                    height="1rem"
+                    viewBox="0 0 16 16"
+                    className="text-gray-200 dark:text-gray-600">
+                    <path
+                      fill="currentColor"
+                      d="M11.498 5.501a1.002 1.002 0 1 1-2.003 0a1.002 1.002 0 0 1 2.003 0M2 4.5A2.5 2.5 0 0 1 4.5 2h6.998a2.5 2.5 0 0 1 2.5 2.5v1.558a2.6 2.6 0 0 0-1-.023V4.5a1.5 1.5 0 0 0-1.5-1.5H4.5A1.5 1.5 0 0 0 3 4.5v6.998c0 .232.052.451.146.647l3.651-3.651a1.7 1.7 0 0 1 2.404 0l.34.34l-.706.707l-.341-.34a.7.7 0 0 0-.99 0l-3.651 3.65c.196.094.415.147.647.147h1.796l-.25 1H4.5a2.5 2.5 0 0 1-2.5-2.5zm11.263 2.507a1.56 1.56 0 0 0-.927.447L8.05 11.742a2.8 2.8 0 0 0-.722 1.256l-.009.033l-.303 1.211a.61.61 0 0 0 .74.74l1.21-.303a2.8 2.8 0 0 0 1.29-.73l4.288-4.288a1.56 1.56 0 0 0-1.28-2.654"
+                    />
+                  </svg>
+                </label>
+              </div>
+              <div className="avatar-preview border-gray-600 dark:border-gray-200">
+                <Image
+                  id="imagePreview"
+                  src={account.profileImage || EmptyProfile}
+                  alt="preview-profile"
+                  width={96}
+                  height={96}
+                />
+              </div>
+            </div>
+            <div className="edit-nickname">
+              <input
+                type="text"
+                ref={nickNameRef}
+                name="nickname"
+                id="nickname"
+                placeholder="Nickname"
+                className="w-full border border-gray-300 bg-gray-300 text-gray-900 focus:border-gray-300 disabled:bg-gray-100 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-400 dark:focus:border-gray-600 disabled:dark:bg-gray-700"
+                defaultValue={account.nickname}
+                disabled={isNicknameDisable}
+              />
+              <div className="edit-button-group">
+                {isNicknameDisable ? (
+                  <button
+                    className="bg-gray-600  text-gray-200 hover:bg-[var(--light-primary-color)] dark:bg-gray-500 dark:text-white dark:hover:bg-[var(--primary-color)]"
+                    onClick={onEditNickname}>
+                    Edit
+                  </button>
+                ) : (
+                  <>
+                    <button
+                      className="bg-gray-600  text-gray-200 hover:bg-[var(--light-primary-color)] dark:bg-gray-500 dark:text-white dark:hover:bg-[var(--primary-color)]"
+                      onClick={onClickCancel}>
+                      Cancel
+                    </button>
+                    <button
+                      className="bg-gray-600  text-gray-200 hover:bg-[var(--light-primary-color)] dark:bg-gray-500 dark:text-white dark:hover:bg-[var(--primary-color)]"
+                      onClick={onClickSave}>
+                      Save
+                    </button>
+                  </>
+                )}
+              </div>
+            </div>
+          </ModalContainer>
         </Modal.Body>
       </Modal>
     </>
@@ -231,6 +334,7 @@ const DetailButton = styled.button`
       height: 100%;
 
       position: absolute;
+      top: 0;
 
       display: flex;
       align-items: center;
@@ -257,5 +361,107 @@ const DetailButton = styled.button`
       font-size: 0.75rem;
       line-height: 1.125rem;
     } */
+  }
+`
+
+const ModalContainer = styled.div`
+  .avatar-upload {
+    position: relative;
+    max-width: 6.8125rem;
+    margin: 2.125rem auto;
+
+    .avatar-edit {
+      position: absolute;
+      right: 0.5rem;
+      top: 0;
+      z-index: 1;
+
+      input {
+        display: none;
+
+        & + label {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+
+          width: 1.75rem;
+          height: 1.75rem;
+          margin-bottom: 0;
+          border-radius: 100%;
+          border: 1px solid transparent;
+          box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.12);
+          cursor: pointer;
+          font-weight: normal;
+          transition: all 0.2s ease-in-out;
+
+          svg {
+            width: 1.25rem;
+            height: 1.25rem;
+          }
+        }
+      }
+    }
+
+    .avatar-preview {
+      width: 6rem;
+      height: 6rem;
+
+      position: relative;
+      border-radius: 100%;
+      border-width: 2px;
+      border-style: solid;
+
+      box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
+
+      > div {
+        width: 100%;
+        height: 100%;
+        border-radius: 100%;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+      }
+    }
+  }
+
+  .edit-nickname {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    gap: 0.5rem;
+
+    height: 2.625rem;
+    max-height: 2.625rem;
+
+    > * {
+      height: 100%;
+    }
+    input[type='text'] {
+      outline: none;
+      border-radius: 0.5rem;
+
+      &:focus {
+        box-shadow: none;
+      }
+      &:disabled {
+        cursor: not-allowed;
+      }
+    }
+
+    .edit-button-group {
+      display: flex;
+      flex-flow: row nowrap;
+      gap: 0.5rem;
+
+      button {
+        height: 100%;
+        white-space: nowrap;
+        padding: 0 1rem;
+
+        border-radius: 0.5rem;
+
+        transition: background-color 0.2s ease-in-out;
+      }
+    }
   }
 `
