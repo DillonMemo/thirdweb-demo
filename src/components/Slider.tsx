@@ -1,6 +1,7 @@
 'use client'
 
 import Chat from './Chat.component'
+import Series from './Series.component'
 
 export default function Slider() {
   return (
@@ -23,29 +24,7 @@ export default function Slider() {
       </aside>
 
       <div role="status" className="block w-full md:order-1">
-        <div className="flex w-full animate-pulse flex-col items-center space-y-4 divide-y divide-gray-200 rounded-lg border border-gray-200 bg-white p-6 shadow dark:divide-gray-700 dark:border-gray-700 dark:bg-gray-800 dark:shadow-gray-500">
-          <div className="flex w-full items-center justify-between">
-            <div>
-              <div className="mb-2.5 h-2.5 w-36 rounded-full bg-gray-300 dark:bg-gray-600"></div>
-              <div className="h-2 w-52 rounded-full bg-gray-200 dark:bg-gray-700"></div>
-            </div>
-            <div className="h-2.5 w-20 rounded-full bg-gray-300 dark:bg-gray-700"></div>
-          </div>
-
-          {Array(30)
-            .fill(undefined)
-            .map((_, index) => (
-              <div
-                key={`skeleton-${index}`}
-                className="flex w-full items-center justify-between pt-4">
-                <div>
-                  <div className="mb-2.5 h-2.5 w-36 rounded-full bg-gray-300 dark:bg-gray-600"></div>
-                  <div className="h-2 w-52 rounded-full bg-gray-200 dark:bg-gray-700"></div>
-                </div>
-                <div className="h-2.5 w-20 rounded-full bg-gray-300 dark:bg-gray-700"></div>
-              </div>
-            ))}
-        </div>
+        <Series />
       </div>
 
       <aside

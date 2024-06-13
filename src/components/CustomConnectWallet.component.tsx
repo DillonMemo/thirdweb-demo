@@ -19,6 +19,7 @@ import styled from 'styled-components'
 import { toast } from 'react-toastify'
 // import { useQuery } from '@tanstack/react-query'
 import { useRecoilState } from 'recoil'
+import { useTranslations } from 'next-intl'
 
 interface Props extends Pick<ConnectButtonProps, 'connectButton' | 'detailsButton'> {
   locale: LocaleType
@@ -30,6 +31,7 @@ export default function CustomConnectWallet({
   detailsButton,
   locale,
 }: Props) {
+  const translate = useTranslations()
   const [isNicknameDisable, setIsNicknameDisable] = useState(true)
   const [account, setAccount] = useRecoilState(accountState)
   const [isEditProfileModal, setIsEditProfileModal] = useRecoilState(isEditProfileModalState)
@@ -79,10 +81,10 @@ export default function CustomConnectWallet({
   /**
    * @description 프로필 수정 모달 열기 클릭 이벤트 핸들러
    */
-  const onEditProfile = (event: React.MouseEvent<HTMLDivElement>) => {
+  const onEditProfile = useCallback((event: React.MouseEvent<HTMLDivElement>) => {
     event.stopPropagation()
     setIsEditProfileModal(true)
-  }
+  }, [])
 
   /**
    * @description 닉네임 수정 클릭 이벤트 핸들러
@@ -117,6 +119,7 @@ export default function CustomConnectWallet({
 
   /**
    * @example contract
+   * @deprecated
    */
   // setTimeout(async () => {
   //   const contract = getContract({
@@ -146,7 +149,7 @@ export default function CustomConnectWallet({
             <>
               <DetailButton
                 type="button"
-                className={`${detailsButton?.className} rounded-xl shadow-[var(--light-primary-color)] dark:shadow-[var(--primary-color)]`}>
+                className={`${detailsButton?.className} rounded-xl shadow-blue-600 dark:shadow-blue-500`}>
                 <div
                   className="detail-image-wrap bg-slate-300 dark:bg-gray-600"
                   data-modal-target="crud-modal"
@@ -214,7 +217,7 @@ export default function CustomConnectWallet({
           content: { base: 'h-auto w-full' },
         }}
         onClose={() => setIsEditProfileModal(false)}>
-        <Modal.Header>Edit Profile</Modal.Header>
+        <Modal.Header>{translate('edit_profile_modal_title')}</Modal.Header>
         <Modal.Body className="">
           <ModalContainer className="space-y-6">
             <div className="avatar-upload">
@@ -222,7 +225,7 @@ export default function CustomConnectWallet({
                 <input type="file" id="imageUpload" accept=".png, .jpg, .jpeg" />
                 <label
                   htmlFor="imageUpload"
-                  className="bg-gray-600 hover:border-gray-600 hover:bg-[var(--light-primary-color)] dark:bg-gray-200 dark:hover:border-gray-200 dark:hover:bg-[var(--primary-color)]">
+                  className="bg-gray-600 hover:border-gray-600 hover:bg-blue-600 dark:bg-gray-200 dark:hover:border-gray-200 dark:hover:bg-blue-500">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="1rem"
@@ -260,21 +263,21 @@ export default function CustomConnectWallet({
               <div className="edit-button-group">
                 {isNicknameDisable ? (
                   <button
-                    className="bg-gray-600  text-gray-200 hover:bg-[var(--light-primary-color)] dark:bg-gray-500 dark:text-white dark:hover:bg-[var(--primary-color)]"
+                    className="bg-gray-600  text-gray-200 hover:bg-blue-600 dark:bg-gray-500 dark:text-white dark:hover:bg-blue-500"
                     onClick={onEditNickname}>
-                    Edit
+                    {translate('edit_profile_modal_edit_button')}
                   </button>
                 ) : (
                   <>
                     <button
-                      className="bg-gray-600  text-gray-200 hover:bg-[var(--light-primary-color)] dark:bg-gray-500 dark:text-white dark:hover:bg-[var(--primary-color)]"
+                      className="bg-gray-600  text-gray-200 hover:bg-blue-600 dark:bg-gray-500 dark:text-white dark:hover:bg-blue-500"
                       onClick={onClickCancel}>
-                      Cancel
+                      {translate('edit_profile_modal_cancel_button')}
                     </button>
                     <button
-                      className="bg-gray-600  text-gray-200 hover:bg-[var(--light-primary-color)] dark:bg-gray-500 dark:text-white dark:hover:bg-[var(--primary-color)]"
+                      className="bg-gray-600  text-gray-200 hover:bg-blue-600 dark:bg-gray-500 dark:text-white dark:hover:bg-blue-500"
                       onClick={onClickSave}>
-                      Save
+                      {translate('edit_profile_modal_save_button')}
                     </button>
                   </>
                 )}

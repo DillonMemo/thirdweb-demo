@@ -1,3 +1,5 @@
+'use client'
+
 import { addDoc, collection, onSnapshot, orderBy, query } from 'firebase/firestore'
 import { useCallback, useEffect } from 'react'
 import { useRecoilState, useRecoilValue } from 'recoil'

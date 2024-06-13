@@ -1,3 +1,7 @@
 {
-  "need_signin": "Available only to sign in users."
+  "need_signin": "Available only to sign in users.",
+  "edit_profile_modal_title": "Edit Profile",
+  "edit_profile_modal_edit_button": "Edit",
+  "edit_profile_modal_cancel_button": "Cancel",
+  "edit_profile_modal_save_button": "Save"
 }
