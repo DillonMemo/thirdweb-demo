@@ -3,21 +3,21 @@
 import { ConnectButton, ConnectButtonProps } from 'thirdweb/react'
 import { Wallet, inAppWallet } from 'thirdweb/wallets'
 import { useCallback, useRef, useState } from 'react'
+import AuthService from '@/service/auth/auth.service'
 import EmptyProfile from '../../public/images/no-profile.png'
 import Image from 'next/image'
 import { LocaleType } from '@/i18n'
 import { Modal } from 'flowbite-react'
-// import TestService from '@/service/example/example.service'
 import { ThirdwebClient } from 'thirdweb'
 import { accountState } from '@/recoil/account'
 import { base } from 'thirdweb/chains'
-// import { createHmac } from 'crypto'
+import { createHmac } from 'crypto'
 import { debounce } from 'lodash'
 import { getUserEmail } from 'thirdweb/wallets/embedded'
 import { isEditProfileModalState } from '@/recoil/modal'
 import styled from 'styled-components'
 import { toast } from 'react-toastify'
-// import { useQuery } from '@tanstack/react-query'
+import { useMutation } from '@tanstack/react-query'
 import { useRecoilState } from 'recoil'
 import { useTranslations } from 'next-intl'
 
@@ -49,6 +49,25 @@ export default function CustomConnectWallet({
   //   queryFn: () => TestService.getPhotos(),
   // })
 
+  const { mutate: signIn } = useMutation({
+    mutationFn: (props: { walletAddress: string; verifyValue: string }) =>
+      AuthService.signIn(props.walletAddress, props.verifyValue),
+    onError: () => console.error('error auth'),
+    onSuccess:
+      /** @todo 타입정의 하기 */
+      (res: { accessToken: string; nickName: string; refreshToken: string; userSeq: number }) => {
+        debugger
+        console.log(res)
+
+        setAccount((prev) => ({
+          ...prev,
+          nickname: res.nickName,
+        }))
+
+        toast.success('Successed connect to wallet')
+      },
+  })
+
   const onConnect = useCallback(
     debounce(async (wallet: Wallet) => {
       try {
@@ -59,15 +78,15 @@ export default function CustomConnectWallet({
 
           if (email) {
             /** @todo hash api request */
-            // const hash = createHmac('sha256', 'sevenlinelabs_tipster').update(email).digest('hex')
+            console.log('env 1', process.env.NEXT_PUBLIC_CRYPTO_HASH_KEY)
+            const hash = createHmac('sha256', process.env.NEXT_PUBLIC_CRYPTO_HASH_KEY || '')
+              .update(email)
+              .digest('hex')
 
-            setAccount((prev) => ({
-              ...prev,
-              ...(email && { email, nickname: email.split('@')[0] }),
-              wallet,
-            }))
+            signIn({ walletAddress: address, verifyValue: hash })
+            debugger
 
-            toast.success('Successed connect to wallet')
+            setAccount((prev) => ({ ...prev, ...(email && { email }), wallet }))
           } else throw new SyntaxError('not found email')
         } else throw new SyntaxError('not found address')
       } catch (error) {
