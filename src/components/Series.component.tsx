@@ -10,7 +10,6 @@ import { accountState } from '@/recoil/account'
 import dayjs from 'dayjs'
 import { some } from 'lodash'
 import { useRecoilValue } from 'recoil'
-import { useTransition } from 'react'
 
 const GET_ALL_SERIES_IN_NEXT_24_HOURS = gql`
   query GetAllSeriesInNext24Hours($gteDate: String!, $lteDate: String!) {
@@ -24,12 +23,13 @@ const GET_ALL_SERIES_IN_NEXT_24_HOURS = gql`
 `
 
 export default function Series() {
-  const translate = useTransition()
   const account = useRecoilValue(accountState)
 
   const { loading, error, data } = useQuery(GET_ALL_SERIES_IN_NEXT_24_HOURS, {
     variables: { gteDate: dayjs().add(-1, 'd').format(), lteDate: dayjs().format() },
   })
+
+  console.warn('test', loading, error, data)
 
   if (some([account.connectionStatus === 'connecting', loading])) {
     return (

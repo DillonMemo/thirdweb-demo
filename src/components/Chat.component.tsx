@@ -24,7 +24,7 @@ export default function Chat() {
           const value = target.value
           target.value = ''
           await addDoc(collection(db, 'chats'), {
-            nickname: (account.nickname || '***').trim(),
+            nickName: (account.nickName || '***').trim(),
             message: value,
             timestamp: dayjs().toDate(),
           })
@@ -48,7 +48,7 @@ export default function Chat() {
           const value = inputNode.value
           inputNode.value = ''
           await addDoc(collection(db, 'chats'), {
-            nickname: (account.nickname || '***').trim(),
+            nickName: (account.nickName || '***').trim(),
             message: value,
             timestamp: dayjs().toDate(),
           })
@@ -106,7 +106,7 @@ export default function Chat() {
         <div className="flex h-full w-full flex-1 rounded-lg bg-gray-200 dark:bg-gray-700"></div>
       </div>
     )
-  if (!every([account.nickname, account.wallet]))
+  if (!every([account.nickName, account.wallet]))
     return (
       <div className="mt-4 block h-[30rem] w-full rounded-lg border border-gray-200 bg-white p-4 shadow dark:border-gray-700 dark:bg-gray-800 dark:shadow-gray-500">
         <div className="flex h-full w-full items-center justify-center rounded-lg bg-gray-200 px-3 py-2 dark:bg-gray-700">
@@ -126,7 +126,7 @@ export default function Chat() {
             className="flex w-full flex-col rounded-e-xl rounded-es-xl border-gray-200 bg-gray-100 p-2 dark:bg-gray-700">
             <div className="flex items-center space-x-2 rtl:space-x-reverse">
               <span className="text-sm font-semibold text-gray-900 dark:text-white">
-                {chat.nickname.slice(0, chat.nickname.length / 2) + '***'}
+                {chat.nickName.slice(0, chat.nickName.length / 2) + '***'}
               </span>
               <span className="text-sm font-normal text-gray-500 dark:text-gray-400">
                 {chat.timestamp && dayjs(chat.timestamp.toMillis()).format('hh:mm A')}
