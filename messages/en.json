@@ -1,3 +1,12 @@
 {
-  "need_signin": "Available only to sign in users."
+  "need_signin": "Available only to sign in users.",
+  "sign_in": "Sign in",
+  "sign_out": "Sign out",
+  "token_expired": "Your session has expired due to inactivity. Please log in again to continue.",
+  "token_refresh": "Your session token has been refreshed. Please try your request again.",
+  "edit_profile_modal_title": "Edit Profile",
+  "edit_profile_modal_edit_button": "Edit",
+  "edit_profile_modal_cancel_button": "Cancel",
+  "edit_profile_modal_save_button": "Save",
+  "my_wallet_button": "My Wallet"
 }

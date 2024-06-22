@@ -2,12 +2,12 @@
 
 import 'react-toastify/dist/ReactToastify.css'
 import { Bounce, ToastContainer } from 'react-toastify'
-import CustomConnectWallet from '../CustomConnectWallet.component'
+import CustomConnectWallet from '../connect/CustomConnectWallet.component'
 import Image from 'next/image'
 import Language from '../../../public/svgs/Language'
 import Link from 'next/link'
 import { LocaleType } from '@/i18n'
-// import Logo from '../../../public/images/logo.png'
+import Logo from '../../../public/images/logo.png'
 import { Navigate } from './styles'
 import NavigationButton from '../NavigationButton.component'
 import ThemeToggle from './ThemeToggle.component'
@@ -55,19 +55,11 @@ export default function Navigation() {
   }, [])
 
   return (
-    <Navigate className="custom-box-shadow dark:custom-box-shadow bg-[#ffffff] dark:bg-[#0d1426]">
+    <Navigate className="custom-box-shadow dark:custom-box-shadow bg-gray-300 dark:bg-[#0d1426]">
       <nav className="nav">
         <div className="nav-logo">
           <Link href={'/'} locale={locale} className="logo">
-            {/** @example */}
-            <Image
-              src="https://marineinsurer.co.uk/wp-content/uploads/2020/05/logo-dummy.png"
-              alt="logo-image"
-              width={150}
-              height={80}
-              style={{ background: 'white' }}
-            />
-            {/* <Image src={Logo} alt="logo-image" width={150} /> */}
+            <Image src={Logo} alt="logo-image" width={150} />
           </Link>
         </div>
 
@@ -76,15 +68,7 @@ export default function Navigation() {
             <div className="nav-mobile-header">
               <div className="nav-logo">
                 <Link href={'/'} locale={locale} className="logo" onClick={onLogoClick}>
-                  {/** @example */}
-                  <Image
-                    src="https://marineinsurer.co.uk/wp-content/uploads/2020/05/logo-dummy.png"
-                    alt="logo-image"
-                    width={150}
-                    height={80}
-                    style={{ background: 'white' }}
-                  />
-                  {/* <Image src={Logo} alt="logo-image" width={150} /> */}
+                  <Image src={Logo} alt="logo-image" width={150} />
                 </Link>
               </div>
               <div className="close dark:custom"></div>

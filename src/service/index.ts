@@ -8,14 +8,20 @@ interface HTTPInstance {
   patch<T>(url: string, data?: unknown, config?: RequestInit): Promise<T>
 }
 
+interface DefaultResposne<T> {
+  status: number
+  data: T
+}
+
 class Service {
   public http: HTTPInstance
 
   private baseURL: string
-  private headers: Record<string, string> | undefined
+  private headers: Record<string, string>
 
   constructor(url: string) {
     this.baseURL = url
+    this.headers = {}
 
     this.http = {
       get: this.get.bind(this),
@@ -38,12 +44,14 @@ class Service {
       const response = await fetch(this.baseURL + url, {
         method,
         headers: {
+          ...(data instanceof FormData ? {} : { 'Content-Type': 'application/json' }),
           ...this.headers,
-          'Content-Type': 'application/json',
           ...config?.headers,
         },
         credentials: 'include',
-        ...((data as any) && { body: JSON.stringify(data) }),
+        ...((data as any) && data instanceof FormData
+          ? { body: data }
+          : { body: JSON.stringify(data) }),
         // body: data ? JSON.stringify(data) : undefined,
         ...config,
       })
@@ -52,8 +60,13 @@ class Service {
         throw new Error('Network response was not ok')
       }
 
-      const responseData: T = await response.json()
-      return responseData
+      const responseData: DefaultResposne<T> = await response.json()
+
+      'data' in responseData &&
+        'accessToken' in (responseData as any).data &&
+        (this.headers['Authorization'] = `Bearer ${(responseData as any).data.accessToken}`)
+
+      return responseData.data
     } catch (error) {
       console.error('Error:', error)
       throw error

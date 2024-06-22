@@ -12,6 +12,7 @@ function makeClient() {
   const httpLink = new HttpLink({
     uri: 'https://api.grid.gg/central-data/graphql',
     headers: {
+      /** @todo 추후 ENV 파일로 키값 이동 */
       'x-api-key': 'LeyErJpFjuVBwykhRnOJxbDfDd8pkTAcIyQL3YdY',
     },
   })

@@ -11,10 +11,19 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        hostname: 'marineinsurer.co.uk',
-      }
-    ]
-  }
+        protocol: 'https',
+        hostname: 'static.tipsplay.gg',
+        pathname: '/**',
+        port: '',
+      },
+      {
+        protocol: 'https',
+        hostname: 'd3n2w13ni1lm5q.cloudfront.net',
+        pathname: '/**',
+        port: '',
+      },
+    ],
+  },
 }
 
 export default withNextIntl(nextConfig)
