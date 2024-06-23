@@ -1,6 +1,6 @@
 import Service from '../'
 
-const API_PATH: string = 'http://43.200.33.31:3000'
+const API_PATH: string = process.env.NEXT_PUBLIC_API_URL || ''
 
 export type SignInResponse = {
   userSeq: number
