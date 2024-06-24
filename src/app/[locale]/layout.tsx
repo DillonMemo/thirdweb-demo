@@ -12,8 +12,8 @@ const myFont = localFont({
 })
 
 export const metadata: Metadata = {
-  title: 'Estack Demo',
-  description: 'This Estack rendering page',
+  title: 'TipsPlay Demo',
+  description: 'This TipsPlay rendering page',
 }
 
 export default function RootLayout({
